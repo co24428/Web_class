@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+
+<body>
+    <form action="test.html" method="get">
+        First name:<input type="text" name="fname" id="fname">
+        <br>
+        Last name:<input type="text" name="lname" id="lname">
+        <input type="submit" value="submit">
+    </form>
+    <p>
+        upper submit method is "GET". So data will be shown in next link after /?xxxxx
+    </p>
+    <h1>radio button</h1>
+    <form>
+        <input type="radio" name="lesson" value="math">math
+        <br>
+        <input type="radio" name="lesson" value="english">english
+        <br>
+        <input type="radio" name="lesson" value="computer">computer
+    </form>
+    <h1>checkbox</h1>
+
+    <form>
+        <input type="checkbox" name="Profession" value="Teacher">
+        I am a Teacher
+        <br>
+        <input type="checkbox" name="Profession" value="Driver">
+        I am a Driver
+    </form>
+    <h1>Password</h1>
+    <form action="test.com" method="POST">
+        First name:
+        <input type="text" id="fname" name="fname">
+        Last name:
+        <input type="text" id="lname" name="lname">
+        pass:
+        <input type="password" id="pass" name="pass">
+        <input type="submit" value="submit">
+    </form>
+    <p>
+        upper submit method is "POST". Data are hidden in code. it might be get data through request.post.data?!
+    </p>
+</body>
+
+</html>
