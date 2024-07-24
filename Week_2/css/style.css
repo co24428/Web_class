@@ -1,0 +1,5 @@
+body { background-color: rgb(241,146,21);}
+h1 { color: rgba(200, 200, 200, 0.9); background-color: brown; box-shadow: brown 5px 5px 5px;}
+h2 { background-image: url('../../images/bluebox.png'); background-size:auto;}
+p { background-color: rgb(241, 200, 21); }
+div { background-color: rgb(153, 68, 30);}
