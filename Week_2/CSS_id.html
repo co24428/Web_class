@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #abc > p {
+            color: blue;
+        }
+        #abc > ul {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="abc">
+        <p>
+            first paragraph
+            <p>
+                paragraph in first paragraph
+            </p>
+        </p>
+        <p>
+            second paragraph
+        </p>
+        <p>
+            third paragraph
+            <ul>
+                <li>first li</li>
+                <li>second li</li>
+                <li>third li</li>
+            </ul>
+        </p>
+        <p>
+            fourth paragraph
+        </p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(e){
+            let el = document.getElementById("abc");
+            // console.log(el.children);
+            console.log("el has childen: ", el.children);
+            // console.log(el.children[0].innerHTML);
+            el.style.backgroundColor = "yellow";
+        });
+
+        function test(){
+            let name = "greystone";
+            console.log(name);
+        }
+        test();
+        // console.log(name) // Undefined... name variable is not in scope!
+    </script>
+</body>
