@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #abc > p {
+            color: blue;
+        }
+        #abc > ul {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="abc">
+        <p>
+            first paragraph
+            <p>
+                paragraph in first paragraph
+            </p>
+        </p>
+        <p>
+            second paragraph
+        </p>
+        <p>
+            third paragraph
+            <ul>
+                <li>first li</li>
+                <li>second li</li>
+                <li>third li</li>
+            </ul>
+        </p>
+        <p>
+            fourth paragraph
+        </p>
+    </div>
+    <script src="utils.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(e){
+            let name = getFullName("Steve", "Jobs");
+            console.log(name);
+
+            let date = getDate();
+            console.log(date);
+        });
+    </script>
+</body>

@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #abc > p {
+        #abc>p {
             color: blue;
         }
-        #abc > ul {
+
+        #abc>ul {
             color: green;
         }
     </style>
@@ -18,35 +19,34 @@
     <div id="abc">
         <p>
             first paragraph
-            <p>
-                paragraph in first paragraph
-            </p>
+        <p>
+            paragraph in first paragraph
+        </p>
         </p>
         <p>
             second paragraph
         </p>
         <p>
             third paragraph
-            <ul>
-                <li>first li</li>
-                <li>second li</li>
-                <li>third li</li>
-            </ul>
+        <ul>
+            <li>first li</li>
+            <li>second li</li>
+            <li>third li</li>
+        </ul>
         </p>
         <p>
             fourth paragraph
         </p>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function(e){
+        function setBackgroundColor(e) {
             let el = document.getElementById("abc");
-            // console.log(el.children);
-            console.log("el has childen: ", el.children);
-            // console.log(el.children[0].innerHTML);
-            el.style.backgroundColor = "yellow";
-        });
+            el.style.backgroundColor = "yellowgreen";7
+        }
 
-        function test(){
+        document.addEventListener("DOMContentLoaded", setBackgroundColor);
+
+        function test() {
             let name = "greystone";
             console.log(name);
         }
