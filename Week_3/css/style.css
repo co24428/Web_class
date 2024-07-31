@@ -1,0 +1,40 @@
+/* body {
+    background-color: white;
+}
+
+form {
+    background-color: yellowgreen;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-image: linear-gradient(blue, skyblue);
+    box-sizing: border-box;
+}
+button {
+    background-color: #feac32;
+  background-image: linear-gradient(green, greenyellow);
+} */
+
+h3 {
+    background-color: aquamarine; 
+}
+
+input {
+    border: 1px solid blue;
+    border-radius: 3px;
+    width: 70%
+}
+
+div.container {
+    display: flex;
+    gap: 5px;
+}
+
+div.calc {
+    background-color: bisque;
+    box-shadow: black 1px 1px 1px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 40%;
+    height: 30%;
+    border-radius: 10px;
+}

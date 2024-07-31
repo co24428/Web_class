@@ -22,6 +22,15 @@ function addNumbers() {
     const resultId = "addResult";
     document.getElementById(resultId).innerText = resultValue;
 }
+// onclick function on day1's 'div' button
+function divNumbers() {
+    const myForm = document.forms.div;
+    const myNumber1 = myForm.firstDiv.value;
+    const myNumber2 = myForm.secondDiv.value;
+    const resultValue = parseInt(myNumber1) / parseInt(myNumber2);
+    const resultId = "divResult";
+    document.getElementById(resultId).innerText = resultValue;
+}
 
 // After all content loading // General Rule!!
 document.addEventListener("DOMContentLoaded", function(e) {
