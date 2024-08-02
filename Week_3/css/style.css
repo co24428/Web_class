@@ -14,7 +14,7 @@ button {
   background-image: linear-gradient(green, greenyellow);
 } */
 
-h3 {
+h3, h1 {
     background-color: aquamarine; 
 }
 
@@ -24,17 +24,55 @@ input {
     width: 70%
 }
 
-div.container {
+/* display: flex */
+/* div.container {
     display: flex;
     gap: 5px;
+    padding: 5px;
+    background-color: skyblue;
+    width: 500px;
+    height: 500px;
+} */
+
+/* display: grid */
+div.container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 0px;
+    padding: 5px;
+    background-color: skyblue;
+    width: 500px;
+    height: 500px;
 }
 
+/* Only for Direct descendant(child), not affected to indirect child*/
+/* div.container > div { */
+/* div.container > div.calc  { */
 div.calc {
     background-color: bisque;
     box-shadow: black 1px 1px 1px;
     box-sizing: border-box;
     padding: 10px;
-    width: 40%;
-    height: 30%;
+    width: 90%;
+    height: 70%;
     border-radius: 10px;
+}
+
+div.big {
+    width: 300px;
+    height: 300px;
+    background-color: blue;
+    border: black solid 1px;
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+div.small {
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    padding: 0px;
+    margin: auto auto;
+    
 }

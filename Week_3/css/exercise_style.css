@@ -1,0 +1,14 @@
+body {
+    /* background-image: url(../../images/test.png); */
+    background-repeat: repeat-y;
+}
+
+h1 {
+    color: blue;
+}
+
+
+#margin_div {
+    border-style: solid;
+    margin-left: 50px;
+}

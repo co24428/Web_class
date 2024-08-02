@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>This page is for prcticing Javascript</h1>
+    <div class="container">
+        <div class="calc">
+            <form name="add"> 
+                <div>
+                    <h3>Add Numbers</h3>
+                    <input type="text" name="firstAdd"> 
+                    <input type="text" name="secondAdd">
+                    <input type="button" onclick="addNumbers()" value="Add">
+                    <h4 id="addResult"></h4>
+                </div>
+            </form>
+        </div>
+        <div class="calc">
+            <form name="div">
+                <div>
+                    <h3>Div Numbers</h3>
+                    <input type="text" name="firstDiv">
+                    <input type="text" name="secondDiv">
+                    <input type="button" onclick="divNumbers()" value="Div">
+                    <h4 id="divResult"></h4>
+                </div>
+            </form>
+        </div>
+        <div class="calc">
+            <form name="mul"> 
+                <div>
+                    <h3>Mul Numbers</h3>
+                    <input type="text" name="firstMul"> 
+                    <input type="text" name="secondMul">
+                    <input type="button" onclick="mulNumbers()" value="Mul">
+                    <h4 id="mulResult"></h4>
+                </div>
+            </form>
+        </div>
+        <div class="calc">
+            <form name="sub"> 
+                <div>
+                    <h3>Sub Numbers</h3>
+                    <input type="text" name="firstSub"> 
+                    <input type="text" name="secondSub">
+                    <input type="button" onclick="subNumbers()" value="Sub">
+                    <h4 id="subResult"></h4>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="big">
+        <div class="small">
+        </div>
+    </div>
+
+    <script src="./utils/utils.js"></script>
+</body>

@@ -31,6 +31,24 @@ function divNumbers() {
     const resultId = "divResult";
     document.getElementById(resultId).innerText = resultValue;
 }
+// onclick function on day1's 'sub' button
+function subNumbers() {
+    const myForm = document.forms.sub;
+    const myNumber1 = myForm.firstSub.value;
+    const myNumber2 = myForm.secondSub.value;
+    const resultValue = parseInt(myNumber1) - parseInt(myNumber2);
+    const resultId = "subResult";
+    document.getElementById(resultId).innerText = resultValue;
+}
+// onclick function on day1's 'mul' button
+function mulNumbers() {
+    const myForm = document.forms.mul;
+    const myNumber1 = myForm.firstMul.value;
+    const myNumber2 = myForm.secondMul.value;
+    const resultValue = parseInt(myNumber1) * parseInt(myNumber2);
+    const resultId = "mulResult";
+    document.getElementById(resultId).innerText = resultValue;
+}
 
 // After all content loading // General Rule!!
 document.addEventListener("DOMContentLoaded", function(e) {
