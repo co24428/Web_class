@@ -32,11 +32,72 @@
         tr:nth-child(even):hover{
             background-color: orange;
         }
+        ul > li {
+            background-color: yellowgreen;
+            margin: 3px;
+            padding: 1px;
+            /* padding: 1px 1px 10px 1px; */
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+        li > span {
+            color: purple;
+            background-color: azure;
+            text-align: center;
+        }
+        div.center {
+            border: 1px solid;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: flex-start;
+        }
+        div.center * {
+            flex: 1;
+        }
+        div.center > div {
+            background-color: purple;
+            width: 50px;
+            align-self: center;
+        }
+        div.content {
+            border: 1px solid;
+            width: 100px;
+            height: 100px;
+            align-self: center;
+        }
+        div.content>p {
+            align-self: center;
+        }
+        /* div.content {
+            border: 5px solid black;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        } */
+        #p34 {
+            border: 2px solid;
+            width: 100%;
+            height: 200px;
+            display: flex;
+        }
+        #p34_1 {
+            display: flex;
+            background-color: red;
+            margin:auto auto;
+            width: 50%;
+            height: 50%;
+            text-align: center;
+        }
+        #p34_1 > span {
+            /* align-self:flex-end; */
+            margin: auto auto;
+        }
     </style>
 </head>
 
 <body>
-    <h1>H1 Element</h1>
+    <!-- <h1>H1 Element</h1>
     <p style="color: rgb(255, 255, 0);">This is sample paragraph section</p>
     <p style="color: #ff0000;">This is sample paragraph section</p>
     <p style="color: green;">This is sample paragraph section</p>
@@ -65,7 +126,7 @@
                 margin-top: 8px;">
             Paragraph
         </p>
-    </div>
+    </div> -->
     <h1 style="color: blue;
             text-decoration:underline;
             text-transform: capitalize;
@@ -85,31 +146,54 @@
 
     <table style="width:100%; border: 1px solid black">
         <tr>
-          <th>Company</th>
-          <th>Contact</th>
-          <th>Country</th>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
         </tr>
         <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
         </tr>
         <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
         </tr>
         <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
         </tr>
         <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
         </tr>
-      </table>
+    </table>
+
+    <!-- <ul style="list-style-image: url(../images/list_image.png)";>
+        <li>this</li>
+        <li>is</li>
+        <li>part</li>
+        <li>of</li>
+        <li>a</li>
+        <li>list</li>
+        <li><span>centerize??</span></li>
+    </ul> -->
+
+    <div class="content">
+        <p>tetettet</p>
+    </div>
+    <div class="center">
+        <div>testst</div>
+    </div>
+
+    <div id="p34">
+        <div id="p34_1">
+            <span>align quiz</span> 
+        </div>
+    </div>
 </body>
 
 
