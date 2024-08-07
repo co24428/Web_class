@@ -21,7 +21,8 @@
 }
 .formDiv {
     display: flex;
-    margin  : 30px 30px 0px 100px;
+    /* margin  : 30px 30px 0px 100px; */
+    margin: auto auto;
 }
 
 .formDiv > div {
