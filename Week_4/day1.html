@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-bg-blue-sw: #7af;
+            --bg-bg-blue-lw: #97c;
+        }
+        div.media {
+            background-color: var(--bg-bg-blue-lw);
+        }
+
+        @media screen and (max-width: 768px){
+            div.media {
+                background-color: var(--bg-bg-blue-sw);
+            }
+        }
+        .abc {
+            background-color: greenyellow;
+        }
+
+        .def {
+            color: purple;
+        }
+    </style>
+</head> 
+
+<body>
+    <div>
+        <div class="media">
+            Hi, It's class of week 4!
+        </div>
+        <div class="media">
+            Hi, It's class of week 4!
+        </div>
+        <div class="media">
+            Hi, It's class of week 4!
+        </div>
+        <div class="media">
+            Hi, It's class of week 4!
+        </div>
+
+        <div id="test" class="abc def">
+            <div>
+                Hi, It's class of week 4!
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
