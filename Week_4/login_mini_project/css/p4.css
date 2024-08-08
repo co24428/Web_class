@@ -1,0 +1,21 @@
+.howItWorks {
+    margin-left : 0px;
+    background-color: white;
+}
+.howItWorksContents {
+    display : flex;
+    margin  : 30px 30px 0px 30px;
+}
+.howItWorksContents > div {
+    margin      : 0px auto;
+    text-align  : center;
+}
+.howItWorksContents > div > img {
+    width   : 80%;
+    height  : 80%;
+}
+.howItWorksContents > div > p {
+    border  : 2px dotted rgb(255, 126, 148);
+    width   : 60%;
+    margin  : auto auto;
+}

@@ -1,0 +1,44 @@
+.contact {
+    margin-left : 0px;
+    background-color: white;
+    width: 100%;
+    height: 1000px;
+}
+.miniHeader {
+    padding-top : 10px;
+    text-align  : center;
+}
+.miniHeader > h3 {
+    text-transform  : capitalize;
+    color: purple;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+.miniHeader > hr {
+    width           : 10%;
+    border          : 1px solid purple;
+    border-radius   : 10%;
+}
+.formDiv {
+    display: flex;
+    /* margin  : 30px 30px 0px 100px; */
+    margin: auto auto;
+}
+
+.formDiv > div {
+    margin: 0px 10px;
+}
+.formRight {
+    text-align: center;
+}
+.formRight > input {
+    background: linear-gradient(90deg, #E43188, #872488);
+    border: 1px solid white;
+    border-radius: 20px;
+    width: 50%;
+    height: 30px;
+}
+.formImage >img {
+    width: 70%;
+    height: 90%;
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/p1.css">
+    <link rel="stylesheet" href="css/p2.css">
+    <link rel="stylesheet" href="css/p3.css">
+    <link rel="stylesheet" href="css/p4.css">
+    <link rel="stylesheet" href="css/p8.css">
+    <style>
+    </style>
+</head> 
+
+<body>
+    <!-- <div class="navbar">
+        <ul class="nav">
+            <li>User Name</li>
+            <li>Log Out</li>
+            <li><a href="#">OUR COURSES</a></li>
+        </ul>
+    </div> -->
+
+    <div id="tableDiv">
+        <div style="display: flex;">
+            <h2>List of student</h2>
+            <button id="refreshTable" style="margin: auto 10px;" onclick="refreshTable()">refresh table</button>
+        </div>
+        <table id="tableStudent" style="width:100%; border: 1px solid black">
+            <tr>
+                <th>Name</th>
+                <th>Grade</th>
+            </tr>
+            <tr>
+                <td>James</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>shawn</td>
+                <td>A+</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>Lisa</td>
+                <td>B</td>
+            </tr>
+        </table>
+
+        <h2>Add Student</h2>
+        <form id="addStudent" action="#" method="get">
+            Name: <input type="text" name="addName" id="addName" placeholder="name" size="20%">
+            <br>
+            Grade: <input type="text" name="addGrade" id="addGrade" placeholder="grade" size="20%">
+            <br>
+            <input type="submit" value="Add Student">
+        </form>
+
+        <h2>Remove Student</h2>
+        <form id="removeStudent" action="#" method="get">
+            Name: <input type="text" name="removeName" id="removeName" placeholder="name" size="20%">
+            <br>
+            <input type="submit" value="Remove Student">
+        </form>
+    </div>
+
+    <script>
+        const myTable = document.getElementById("tableStudent");
+        // for (let i = 1; i < myTable.rows.length; i++) {     
+        //     item = myTable.rows[i].innerText.split("\t");
+        //     // console.log(item);
+        //     localStorage.setItem(item[0], item[1]);
+        // }
+
+        localStorage.clear();
+        let students = ["John", "Tim", "Lisa"];
+        let grades = ["A", "B","C"];
+
+        document.addEventListener("DOMContentLoaded", function (e) {
+            initLocalStorage();
+        });
+
+        function initLocalStorage() {
+            if (localStorage.length == 0) {
+                for (let i=0; i < students.length; i++) {
+                    localStorage.setItem(students[i], grades[i]);
+                }
+            } else {
+                return 0;
+            }
+        }
+        // Read storage and return student
+        function getStudentfromStorage(name) {
+            return localStorage.getItem(name);
+        }
+
+        function removeStudentFromStorage(name) {
+            localStorage.removeItem(name);
+        }
+
+        function addStudentToStorage(name, grade) {
+            localStorage.setItem(name, grade);
+        }
+        function refreshTable() {
+            const numberOfRows = myTable.rows.length;
+            for (let i=0; i< numberOfRows-1; i++) {
+                myTable.deleteRow(-1);
+            }
+            // for (let i=0; i< myTable.rows.length-1; i++) {
+            //     myTable.deleteRow(-1);
+            // }
+            for (let i=0; i< localStorage.length; i++) {
+                const name = localStorage.key(i);
+                const grade = getStudentfromStorage(name);
+                addStudentToTable(name, grade);
+            }
+        }
+
+        function addStudentToTable(name, grade){
+            let newRow = myTable.insertRow(-1);
+            let newName = newRow.insertCell(0);
+            let newGrade = newRow.insertCell(1);
+            newName.innerHTML = name;
+            newGrade.innerHTML = grade;
+        }
+
+        document.getElementById('addStudent').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting
+            
+            
+            const addName = document.getElementById("addName").value;
+            const addGrade = document.getElementById("addGrade").value;
+            addStudentToTable(addName, addGrade);
+
+            addStudentToStorage(addName, addGrade)
+            // console.log(localStorage);
+
+            document.getElementById("addName").value ="";
+            document.getElementById("addGrade").value ="";
+        })
+
+        document.getElementById('removeStudent').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting
+            
+            const removeName = document.getElementById("removeName").value;
+            for (let i=1; i< myTable.rows.length; i++) {
+                const currentName = myTable.rows[i].innerText.split("\t")[0];
+                if(removeName === currentName) {
+                    myTable.deleteRow(i);
+                    localStorage.removeItem(currentName);
+                    document.getElementById("removeName").value ="";
+                    return 0;
+                }
+            }
+        })
+    </script>
+</body>
+
+
+</html>
