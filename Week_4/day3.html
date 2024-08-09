@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .flex {
+            display: flex;
+            border: 3px solid salmon;
+            flex-direction:column;
+            width: 700px;
+            height: 700px;
+            align-items: center;
+            justify-items: center;
+            flex-wrap: wrap;
+        }
+        .flex * {
+            border: 1px solid green;
+            margin: 5px; padding: 5px;
+            font-size: 40px;
+            text-align: center;
+            width: 70px;
+            height: 70px;
+
+        }
+    </style>
+</head> 
+
+<body>
+    <p>test</p>
+    <ul id="list">
+        
+    </ul>
+    <div id="listdiv">
+    </div>
+    <div class="flex">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+    </div>
+</body>
+
+<script src="./day3_script.js">
+
+</script>
+
+</html>
