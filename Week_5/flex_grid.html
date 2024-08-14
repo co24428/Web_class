@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1 {
+            color:hotpink;
+            text-align: center;
+          }
+
+        .flexContainer {
+            display: flex;
+            justify-content: center;
+            /* justify-content: flex-start; */
+            /* justify-content: flex-end; */
+            /* justify-content:space-around; */
+            /* justify-content:space-between; */
+            /* justify-content:space-evenly; */
+            align-items: center;
+            /* In some webpage on news, it might use transition between 
+                "center& wrap" as preview setting with thumbnail and title and 
+                "column" as list setting with title and summarization */
+            /* flex-direction: column; */
+            /* flex-direction:column-reverse; */
+            /* flex-direction:row-reverse; */
+            flex-direction:row;
+            flex-wrap: wrap; /* auto relocation by screen size */
+            border: 2px solid red;
+            
+        }
+        .flexContainer div {
+            border: 3px black;
+            border-radius: 7px;
+            background-color: darkolivegreen;
+            padding: 1em;
+            text-align: center;
+            color: white;
+            /* width: 1fr; */
+            /* margin: auto auto; */
+        }
+
+        .gridContainer {
+            display: grid;
+
+            grid-template-columns: 1fr 2fr 1fr 1fr 2fr;
+            /* grid-template-rows: 100px; */
+            grid-gap: 10px;
+            
+        }
+        .gridContainer div {
+            border: 3px black;
+            border-radius: 7px;
+            background-color: darkolivegreen;
+            padding: 1em;
+            text-align: center;
+            color: white;
+        }
+        .grid-container {
+            box-sizing: border-box;
+            display: grid;
+            /* fixed column numbers */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .grid-container div {
+            border: 3px black;
+            border-radius: 7px;
+            background-color: darkolivegreen;
+            padding: 1em;
+            text-align: center;
+            color: white;
+        }
+        .grid-row-span-2 {
+            /* merge 2 cells across rows (for vertical merge effect)*/
+            grid-row: span 2;
+        }
+        .grid-col-span-2 {
+            /* merge 2 cells across cols (for horizontal merge effect)*/
+            grid-column: span 2;
+        }
+        .grid-child:nth-child(4){
+            grid-column-start: 4;
+            /* start on row 1 and span 2 rows: */
+            grid-row: 1 / span 2;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Flex</h1>
+    <div class="flexContainer">
+        <div>geeksforgeeks 1</div>
+        <div>geeksforgeeks 2</div>
+        <div>geeksforgeeks 3</div>
+        <div>geeksforgeeks 4</div>
+        <div>geeksforgeeks 5</div>
+    </div>
+    <br>
+
+    <h1>Grid (1)</h1>
+    <div class="gridContainer">
+        <div>1. Hudson Volcano (Spanish: Volcán Hudson, Cerro Hudson, or Monte Hudson) is the most active volcano in the Southern Volcanic Zone of the Andes, Chile, having erupted most recently in 2011. It was formed by the subduction of the oceanic Nazca Plate under the continental South American Plate. South of Hudson is a smaller volcano, followed by a long gap without active volcanoes, then the Austral Volcanic Zone. Hudson has the form of a 10-kilometre-wide (6-mile) caldera filled with ice; the Huemules Glacier emerges from the northwestern side of the caldera. The volcano has erupted rocks ranging from basalt to rhyolite, but large parts of the caldera are formed by non-volcanic rocks.</div>
+        <div>2. Hudson Volcano (Spanish: Volcán Hudson, Cerro Hudson, or Monte Hudson) is the most active volcano in the Southern Volcanic Zone of the Andes, Chile, having erupted most recently in 2011. It was formed by the subduction of the oceanic Nazca Plate under the continental South American Plate. South of Hudson is a smaller volcano, followed by a long gap without active volcanoes, then the Austral Volcanic Zone. Hudson has the form of a 10-kilometre-wide (6-mile) caldera filled with ice; the Huemules Glacier emerges from the northwestern side of the caldera. The volcano has erupted rocks ranging from basalt to rhyolite, but large parts of the caldera are formed by non-volcanic rocks.</div>
+        <div>3. Hudson Volcano (Spanish: Volcán Hudson, Cerro Hudson, or Monte Hudson) is the most active volcano in the Southern Volcanic Zone of the Andes, Chile, having erupted most recently in 2011. It was formed by the subduction of the oceanic Nazca Plate under the continental South American Plate. South of Hudson is a smaller volcano, followed by a long gap without active volcanoes, then the Austral Volcanic Zone. Hudson has the form of a 10-kilometre-wide (6-mile) caldera filled with ice; the Huemules Glacier emerges from the northwestern side of the caldera. The volcano has erupted rocks ranging from basalt to rhyolite, but large parts of the caldera are formed by non-volcanic rocks.</div>
+        <div>4. Hudson Volcano (Spanish: Volcán Hudson, Cerro Hudson, or Monte Hudson) is the most active volcano in the Southern Volcanic Zone of the Andes, Chile, having erupted most recently in 2011. It was formed by the subduction of the oceanic Nazca Plate under the continental South American Plate. South of Hudson is a smaller volcano, followed by a long gap without active volcanoes, then the Austral Volcanic Zone. Hudson has the form of a 10-kilometre-wide (6-mile) caldera filled with ice; the Huemules Glacier emerges from the northwestern side of the caldera. The volcano has erupted rocks ranging from basalt to rhyolite, but large parts of the caldera are formed by non-volcanic rocks.</div>
+        <div>5. Hudson Volcano (Spanish: Volcán Hudson, Cerro Hudson, or Monte Hudson) is the most active volcano in the Southern Volcanic Zone of the Andes, Chile, having erupted most recently in 2011. It was formed by the subduction of the oceanic Nazca Plate under the continental South American Plate. South of Hudson is a smaller volcano, followed by a long gap without active volcanoes, then the Austral Volcanic Zone. Hudson has the form of a 10-kilometre-wide (6-mile) caldera filled with ice; the Huemules Glacier emerges from the northwestern side of the caldera. The volcano has erupted rocks ranging from basalt to rhyolite, but large parts of the caldera are formed by non-volcanic rocks.</div>
+    </div>
+    <br>
+
+    <h1>Grid (2)</h1>
+    <div class="grid-container">
+        <div class="grid-row-span-2">1. The volcano erupted numerous times in the late Pleistocene[a] and Holocene,[b] forming widespread tephra deposits both in the proximity of Hudson and in the wider region. Four large eruptions took place in 17,300–17,440 BP ("H0 eruption"), 7,750 BP ("H1 eruption"), 4,200 BP ("H2 eruption") and in 1991 AD ("H3 eruption")</div>
+        <div class="grid-col-span-2">2. the second is among the most intense volcanic eruptions in South America during the Holocene. A smaller eruption occurred in 1971. The 7,750 BP and 1991 eruptions had a substantial impact on the human population of Patagonia and (for the 7,750 BP eruption) Tierra del Fuego: The 7,750 BP eruption devastated the local ecosystem and may have caused substantial shifts in human settlement and lifestyle.</div>
+        <div>3. During the 1991 eruption, volcanic ash covered a large area in Chile and neighbouring Argentina, causing high mortality in farm animals, aggravating an existing economic crisis, and reaching as far as Antarctica.</div>
+        <div>4. Hudson Volcano lies in the Andes of southern Chile,[3] northwest of Lago Buenos Aires.[4] The name "Hudson" refers to Francisco Hudson, a Chilean Navy captain and hydrographer.[5] Another name of the volcano is Cerro de los Ventisqueros.[6][c] Politically, Hudson Volcano is in the Aysen Province[6] of Chile's Aysen Region.[8] Most of the volcano is in the municipality of Aysen; the eastern and southern parts are in the municipalities of Coihaique and Rio Ibáñez, respectively.[9] Owing to its remoteness and the dense vegetation at its foot, the volcano is poorly studied</div>
+        <div class="grid-col-span-2">5. it was recognized as a volcano only[d] in 1970.[14] The closest cities are Puerto Aysen 58 kilometres (36 mi) north-northeast and Coihaique 75 kilometres (47 mi) northeast; the Carretera Austral highway passes 30 kilometres (19 mi) from the volcano.[3] The volcano can be accessed either from the sea along the Huemules River valley or by land via the valley of the Blanco River from Lago Elizalde-Lago Claro.[15] Small populations, mostly farmers, live in the surrounding valleys.</div>
+    </div>
+    <br>
+
+    <h1>Grid (3)</h1>
+    <div class="grid-container">
+        <div class="grid-col-span-2">1. The volcano erupted numerous times in the late Pleistocene[a] and Holocene,[b] forming widespread tephra deposits both in the proximity of Hudson and in the wider region. Four large eruptions took place in 17,300–17,440 BP ("H0 eruption"), 7,750 BP ("H1 eruption"), 4,200 BP ("H2 eruption") and in 1991 AD ("H3 eruption")</div>
+        <div class="grid-child">2. the second is among the most intense volcanic eruptions in South America during the Holocene. A smaller eruption occurred in 1971. The 7,750 BP and 1991 eruptions had a substantial impact on the human population of Patagonia and (for the 7,750 BP eruption) Tierra del Fuego: The 7,750 BP eruption devastated the local ecosystem and may have caused substantial shifts in human settlement and lifestyle.</div>
+        <div class="grid-row-span-2">3. During the 1991 eruption, volcanic ash covered a large area in Chile and neighbouring Argentina, causing high mortality in farm animals, aggravating an existing economic crisis, and reaching as far as Antarctica.</div>
+        <div class="grid-child">4. Hudson Volcano lies in the Andes of southern Chile,[3] northwest of Lago Buenos Aires.[4] The name "Hudson" refers to Francisco Hudson, a Chilean Navy captain and hydrographer.[5] Another name of the volcano is Cerro de los Ventisqueros.[6][c] Politically, Hudson Volcano is in the Aysen Province[6] of Chile's Aysen Region.[8] Most of the volcano is in the municipality of Aysen; the eastern and southern parts are in the municipalities of Coihaique and Rio Ibáñez, respectively.[9] Owing to its remoteness and the dense vegetation at its foot, the volcano is poorly studied</div>
+        <div class="grid-child">5. it was recognized as a volcano only[d] in 1970.[14] The closest cities are Puerto Aysen 58 kilometres (36 mi) north-northeast and Coihaique 75 kilometres (47 mi) northeast; the Carretera Austral highway passes 30 kilometres (19 mi) from the volcano.[3] The volcano can be accessed either from the sea along the Huemules River valley or by land via the valley of the Blanco River from Lago Elizalde-Lago Claro.[15] Small populations, mostly farmers, live in the surrounding valleys.</div>
+        <!-- <div class="grid-col-span-2">5. it was recognized as a volcano only[d] in 1970.[14] The closest cities are Puerto Aysen 58 kilometres (36 mi) north-northeast and Coihaique 75 kilometres (47 mi) northeast; the Carretera Austral highway passes 30 kilometres (19 mi) from the volcano.[3] The volcano can be accessed either from the sea along the Huemules River valley or by land via the valley of the Blanco River from Lago Elizalde-Lago Claro.[15] Small populations, mostly farmers, live in the surrounding valleys.</div> -->
+    </div>
+</body>
+</html>
