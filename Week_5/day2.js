@@ -6,6 +6,16 @@ function sum(){
     resultElem.innerText = parseInt(num1.value) + parseInt(num2.value);
 }
 
+// const genRanHex = size => 
+// [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+
+// console.log(genRanHex(6));
+// console.log(genRanHex(12));
+// console.log(genRanHex(3));
+
+function getRandomHex(){
+    return Math.floor(Math.random() * 16).toString(16);
+}
 function changeBackgroundColor(buttonId){
     const targetElem = document.getElementById("target");
     let targetColor;
@@ -18,6 +28,13 @@ function changeBackgroundColor(buttonId){
     } else if(buttonId === "pickerButton"){
         const pickerElem = document.getElementById("colorpicker");
         targetColor = pickerElem.value;
+    } else if(buttonId === "randomColorButton"){
+        const randomColorButton = document.getElementById("randomColorButton");
+        let colorCode = ""
+        for(let i=0; i<6; i++){
+            colorCode += getRandomHex();
+        }
+        targetColor = `#${colorCode}`;
     }
     targetElem.style.backgroundColor = targetColor;
 }
