@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #randomNumberContainer {
+            display: flex;
+            width: 40%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 2px solid green;
+        }
+        #numDiv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: 800;
+            width: 200px; height: 200px; 
+            border: 2px solid red;
+        }
+        #numResult {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: 800;
+            width: 100px; height: 100px; 
+            border: 2px solid blue;
+        }
+    </style>
+</head> 
+
+<body>
+    <h1>Day 2 in week 5</h1>
+    <h2>1. sum button</h2>
+    <div id="sumDiv">
+        <form action="#" method="get">
+            <input type="number" name="num1" id="num1" placeholder="first number" size="20%">
+            <br>
+            <input type="number" name="num2" id="num2" placeholder="second number" size="20%">
+        </form>
+        <p id="sumResult"></p>
+    </div>
+    <button id="sumButton" onclick="sum()">sum</button>
+    
+    <hr>
+
+    <h2>2. change background-color</h2>
+    <div id="target" style="background-color: black; width: 300px; height: 300px;"></div>
+    <p></p>
+    <button id="redButton" onclick="changeBackgroundColor(this.id)" style="color: red; background-color: orange;">Red</button>
+    <button id="greenButton" onclick="changeBackgroundColor(this.id)" style="color: green; background-color: greenyellow;">Green</button>
+    <button id="blueButton" onclick="changeBackgroundColor(this.id)" style="color: blue; background-color: skyblue;">Blue</button>
+    <p></p>
+    <div id="changeColorDiv">
+        <label for="colorpicker">Color Picker:</label>
+        <input type="color" id="colorpicker" value="#000000">
+        <br>
+        <button id="pickerButton" onclick="changeBackgroundColor(this.id)">change</button>
+    </div>
+
+    <hr>
+
+    <h2>3. Random number</h2>
+    <button id="redButton" onclick="showRandom()">Random number</button>
+    <div id="randomNumberContainer">
+        <div id="numDiv"></div>
+        <div id="numResult"></div>
+    </div>
+
+    <script src="day2.js"></script>
+</body>
+
+
+</html>
