@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function makeDivWithClass(c, h) {
+            // c: class of the html
+            let el = document.createElement("div");
+            el.classList.add(c);
+            return el;
+        }
+        function makeDivWithClassAndText(c, t) {
+            // c: class of the html
+            // t: text of the html we want to
+            let el = document.createElement("div");
+            el.classList.add(c);
+            el.innerText = t;
+            return el;
+        }
+        function setup() {
+            /*
+            const form = document.forms["cardContainer"];
+            const numCardsEl = form["numCards"];
+            console.log(numCardsEl.value);
+            */
+
+           let card = makeDivWithClass("card");
+           let newDiv = makeDivWithClassAndText("toggle", "X");
+           card.appendChild(newDiv);
+           newDiv = makeDivWithClassAndText("num", "5");
+           card.appendChild(newDiv);
+           newDiv = makeDivWithClassAndText("oeResult", "odd");
+           card.appendChild(newDiv);
+
+           let container = document.getElementById("cardContainer");
+           container.appendChild(card);
+        }
+        function shuffle() {
+            console.log("shuffle");
+        }
+
+
+    </script>
+    <style>
+        * {
+            padding: 0; margin: 0;
+        }
+        #cardContainer {
+            box-sizing:border-box;
+            background-color: purple;
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            width: 100%;
+            height: 100%;
+            border: 3px dashed white;
+
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: yellowgreen;
+            height: 130px;
+            width: 90px;
+            
+        }
+        .toggle {
+            cursor:pointer;
+            align-self: flex-end;
+            width: 26px;
+            height: 26px;
+            background-color: purple;
+            padding: 5px;
+            color: white;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: 10px;
+            font-size: 16px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            color: black;
+            font-size: 30px;
+        }
+        .oeResult {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            box-sizing: border-box;
+            border-top: 1px solid blue;
+            width: 100%;
+            height: 35px;
+            background-color: white;
+            color: black;
+            font-size: 25px;
+
+        }
+    </style>
+</head> 
+
+<body>
+    <h1>Day 3 in week 5</h1>
+    <h2>1. Random number div with for loop</h2>
+    <div id="cardContainer">
+        <!-- <div class="card">
+            <div class="toggle">x</div>
+            <div class="num">5</div>
+            <div class="oeResult">odd</div>
+        </div> -->
+    </div>
+
+    <form name="cardContainer">
+        <div class="setup">
+            <input type="text" id="numCards" placeholder="number of cards">
+            <input type="button" id="setupbutton" onclick="setup()" value="Setup">
+        </div>
+        <input type="button" id="sufflebutton" onclick="shuffle()" value="Shuffle">
+    </form>
+</body>
+
+
+</html>
