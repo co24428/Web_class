@@ -40,14 +40,12 @@ const existNumberInArray_q8 = function (arr, target){
     }
     return existed;
 }
-// q9 -> TODO: use map or array functions
+// q9
 const existNumberInArray_q9 = (arr, target) => {
     let existed = false;
-    for (let i=0; i<arr.length; i++){
-        if (arr[i] === target){
-            existed = true;
-            break;
-        }
+    console.log(arr.indexOf(target));
+    if (arr.indexOf(target) !== -1){
+        existed = true;
     }
     return existed;
 }
