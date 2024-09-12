@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        div#content {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+        }
+
+        ul {
+            width: 200px;
+            height: 200px;
+            border: 1px dashed black;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        function makeEditorDetailsTag(editor) {
+            const ul = document.createElement("ul");
+            const props = ["name", "version", "needsUpdate", "tabs"];
+            for (let index = 0; index < props.length; index++) {
+                const prop = props[index];
+                const li = document.createElement("li");
+                li.innerText = editor[prop];
+                ul.appendChild(li);
+            }
+            return ul;
+        }
+
+        // creating object using new keyword
+        // settings properties using dot notation
+        let editor1 = new Object();
+        editor1.name = "notepad++";
+        editor1.version = 1;
+        editor1.needsUpdate = true;
+        editor1.tabs = ["tab1", "tab2", "tab3"];
+
+        let editor2 = new Object();
+        editor2["name"] = "textedit";
+        editor2["version"] = 2;
+        editor2["needsUpdate"] = false;
+        editor2["tabs"] = ["tab1"];
+
+        let editor3 = {
+            name: "vscode",
+            version: 4,
+            needsUpdate: true,
+            tabs: ["tab1", "tab2", "tab3", "tab4"]
+        };
+
+        document.addEventListener("DOMContentLoaded", function (e) {
+            let editors = [editor1, editor2, editor3];
+            const content = document.getElementById("content");
+            for (let index = 0; index < editors.length; index++) {
+                const editor = editors[index];
+                const ul = makeEditorDetailsTag(editor);
+                content.appendChild(ul);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="content"></div>
+</body>
+
+</html>

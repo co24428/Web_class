@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+        h1 { font-size: 1.5em;}
+        h2 { font-size: 1.2em;}
+        a { font-size: large;}
+    </style>
+</head>
+<body>
+    <a href="#" onclick="size12()">size 12</a>
+    <a href="#" onclick="size14()">size 14</a>
+    <a href="#" onclick="size16()">size 16</a>
+    <h1>This is H1</h1>
+    <h2>And... this is H2</h2>
+    
+    <script src="closure.js"></script>
+    <script>
+        function makeSizer(size) {
+            return function() {
+                document.body.style.fontSize = size + 'px';
+            };
+        }
+
+        var size12 = makeSizer(12);
+        var size14 = makeSizer(14);
+        var size16 = makeSizer(16);
+    </script>
+</body>
+</html>

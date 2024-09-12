@@ -1,10 +1,12 @@
 const http = require("http");
 const url = require("url");
-const fs = require("fs");
+const fs = require("fs"); // file system
 const path = require("path");
 const { mimeType, getSanitizedPathname } = require("./lib.js");
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(handler);
+
+function handler(req, res) {
   // function to handle http request
   // e.g. http://localhost:8085/grid.html?username=apple
   let safePathname = getSanitizedPathname(req);
@@ -48,10 +50,13 @@ const server = http.createServer((req, res) => {
       }
     });
   });
-});
+}
 
-server.listen(8085, () => {
-  console.log("Server running at http://localhost:8085");
+const portNum = 8085;
+const logMsg = `Server running at http://localhost:${portNum}`;
+
+server.listen(portNum, () => {
+  console.log(logMsg);
 });
 
 console.log("log from index.js");

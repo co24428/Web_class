@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /*root style start*/
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      :root {
+        --cell-padding: 10px;
+        --cell-gap: 5px;
+        --first-grid-cell: #22f;
+        --last-grid-cell: #0f0;
+      }
+      /*root style end*/
+
+      /* flex style start */
+      .flex-child {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 120px;
+
+        background-color: rgb(84, 84, 152);
+        color: white;
+        padding: var(--cell-padding);
+        box-sizing: border-box;
+        border: 1px solid white;
+        border-radius: 4px;
+      }
+      .flex-child:first-child {
+        background-color: orange;
+      }
+      .flex-child:last-child {
+        background-color: blueviolet;
+      }
+      .flex-container {
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid green;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        gap: var(--cell-gap);
+      }
+      /* flex style end */
+
+      /* grid style start */
+      .grid-child {
+        background-color: rgb(84, 84, 152);
+        color: white;
+        padding: var(--cell-padding);
+        box-sizing: border-box;
+        border: 1px solid white;
+        border-radius: 4px;
+      }
+      .grid-container {
+        box-sizing: border-box;
+
+        display: grid;
+        /* create 4 columns with fixed fraction size */
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: var(--cell-gap);
+      }
+      .grid-row-span-2 {
+        /* merge 2 cells across rows (for vertical merge effect) */
+        grid-row: span 2;
+      }
+      .grid-col-span-2 {
+        /* merge 2 cells across cols (for horizontal merge effect) */
+        grid-column: span 2;
+      }
+      .grid-child:first-child {
+        background-color: var(--first-grid-cell);
+      }
+      .grid-child:last-child {
+        background-color: var(--last-grid-cell);
+        color: black;
+      }
+      .grid-child:nth-child(3) {
+        grid-column-start: 4;
+        /* start cell at this column in the (m x n) grid */
+        grid-row: 1 / span 2;
+        /* start cell at this row index (slash) then use row-span */
+      }
+      i.large {
+        font-size: 40px;
+        font-weight: bold;
+        font-style: normal;
+        color: black;
+      }
+      /* grid style end */
+    </style>
+  </head>
+  <form method="get" action="grid.html">
+    <input type="text" name="username" placeholder="username" />
+    <input type="submit" value="submit" />
+  </form>
+  <h2>%UNAME%</h2>
+  <h3>Flex</h3>
+  <div class="flex-container">
+    <div class="flex-child">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac
+      fermentum justo. Ut ac dui tortor. Nullam molestie metus nec lorem finibus
+      elementum.
+    </div>
+    <div class="flex-child">
+      Nullam sed ligula sed leo tincidunt placerat. Integer auctor id justo eget
+      pellentesque. Aenean nulla lorem, consectetur eget sodales ut, iaculis a
+      mi.
+    </div>
+    <div class="flex-child">
+      Quisque ullamcorper ornare dolor. Aenean quis tempus dolor, porttitor
+      ultrices turpis. Sed placerat leo at laoreet efficitur.
+    </div>
+    <div class="flex-child">
+      Duis sed tellus lacinia enim interdum aliquet. Etiam arcu quam, sodales at
+      vulputate eu, scelerisque sed dui. Vivamus volutpat neque eget eros
+      venenatis eleifend ut a magna.
+    </div>
+    <div class="flex-child">
+      Sed imperdiet tellus in nunc aliquet dapibus. Aliquam quam orci, tristique
+      a lobortis non, rutrum ut turpis.
+    </div>
+    <div class="flex-child">Donec dapibus a quam a aliquam.</div>
+    <div class="flex-child">
+      Duis pretium eget ante eget aliquam. Donec tincidunt metus non dolor
+      pretium commodo. Ut sed massa ante.
+    </div>
+    <div class="flex-child">
+      Phasellus lectus augue, condimentum eu turpis sit amet, gravida tristique
+      augue. Vestibulum ut est at risus sollicitudin cursus non et mauris. Ut eu
+      mattis velit. Vestibulum quam massa, auctor id fringilla eu, porttitor
+      eget urna.
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <hr />
+  <h3>Grid</h3>
+  <div class="grid-container">
+    <div class="grid-child grid-col-span-2">
+      <i class="large">1.</i> Phasellus lectus augue, condimentum eu turpis sit
+      amet, gravida tristique augue. Vestibulum ut est at risus sollicitudin
+      cursus non et mauris. Ut eu mattis velit. Vestibulum quam massa, auctor id
+      fringilla eu, porttitor eget urna.
+    </div>
+    <div class="grid-child">
+      <i class="large">2.</i> Duis pretium eget ante eget aliquam. Donec
+      tincidunt metus non dolor pretium commodo. Ut sed massa ante.
+    </div>
+    <div class="grid-child">
+      <i class="large">3.</i> Phasellus lectus augue, condimentum eu turpis sit
+      amet, gravida tristique augue. Vestibulum ut est at risus sollicitudin
+      cursus non et mauris. Ut eu mattis velit. Vestibulum quam massa, auctor id
+      fringilla eu, porttitor eget urna.
+    </div>
+    <div class="grid-child">
+      <i class="large">4.</i> Duis pretium eget ante eget aliquam. Donec
+      tincidunt metus non dolor pretium commodo. Ut sed massa ante.
+    </div>
+    <div class="grid-child grid-col-span-2">
+      <i class="large">5.</i> Phasellus lectus augue, condimentum eu turpis sit
+      amet, gravida tristique augue. Vestibulum ut est at risus sollicitudin
+      cursus non et mauris. Ut eu mattis velit. Vestibulum quam massa, auctor id
+      fringilla eu, porttitor eget urna.
+    </div>
+  </div>
+</html>
