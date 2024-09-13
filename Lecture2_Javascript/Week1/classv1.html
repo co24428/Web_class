@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        div#content {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+        }
+        ul {
+            width: 200px;
+            height: 200px;
+            border: 1px dashed black;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        class Editor {
+            constructor(name, version, needsUpdate, tabs) {
+                this.name = name
+                this.version = version
+                this.needsUpdate = needsUpdate
+                this.tabs = tabs
+            }
+            alertTabs() {
+                let tabWord = "";
+                if(this.tabs.length <= 1) {
+                    tabWord = "tab";
+                } else {
+                    tabWord = "tabs";
+                }
+                // tabWord is a local variable
+                // it is not a property, so we don't
+                // use 'this' keyword
+                let note = `${this.name} has ${this.tabs.length} ${tabWord}`
+                alert(note)
+            }
+        }
+        let editor1 = new Editor(
+            "notepad++",
+            1,
+            false,
+            ["first-tab"]
+        )
+        let editor2 = new Editor(
+            "textedit",
+            2,
+            false,
+            ["tab1","tab2","tab3"]
+        )
+        let editor3 = new Editor(
+            "vscode",
+            4,
+            true,
+            ["tab1"]
+        )
+    </script>
+    <script>
+        function makeEditorDetailsTag(editor) {
+            const ul = document.createElement("ul");
+            const props = ["name", "version", "needsUpdate", "tabs"];
+            for (let index = 0; index < props.length; index++) {
+                const prop = props[index];
+                const li = document.createElement("li");
+                li.innerText = editor[prop];
+                ul.appendChild(li);
+            }
+
+            const link = document.createElement("li");
+            link.style.backgroundColor = "cyan";
+            link.style.border = "2px solid black";
+            link.style.width = "33px";
+            link.innerText = "click";
+            link.onclick = editor.alertTabs.bind(editor);
+            ul.appendChild(link);
+
+            return ul;
+        }
+
+        document.addEventListener("DOMContentLoaded", function (e) {
+            let editors = [editor1, editor2, editor3];
+            const content = document.getElementById("content");
+            for (let index = 0; index < editors.length; index++) {
+                const editor = editors[index];
+                const ul = makeEditorDetailsTag(editor);
+                content.appendChild(ul);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="content"></div>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        div#content {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+        }
+
+        ul {
+            width: 200px;
+            height: 200px;
+            border: 1px dashed black;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        function Editor(name, version, needsUpdate, tabs) {
+            this.name = name
+            this.version = version
+            this.needsUpdate = needsUpdate
+            this.tabs = tabs
+            this.alertTabs = function() {
+                let note = `${this.name} has ${this.tabs.length} tabs`
+                alert(note)
+            }
+        }
+        let editor1 = new Editor(
+            "notepad++",
+            1,
+            false,
+            ["tab1","tab2"]
+        )
+        let editor2 = new Editor(
+            "textedit",
+            2,
+            false,
+            ["tab1","tab2","tab3"]
+        )
+        let editor3 = new Editor(
+            "vscode",
+            4,
+            true,
+            ["tab1"]
+        )
+    </script>
+    <script>
+        function makeEditorDetailsTag(editor) {
+            const ul = document.createElement("ul");
+            const props = ["name", "version", "needsUpdate", "tabs"];
+            for (let index = 0; index < props.length; index++) {
+                const prop = props[index];
+                const li = document.createElement("li");
+                li.innerText = editor[prop];
+                ul.appendChild(li);
+            }
+
+            const link = document.createElement("li");
+            link.style.textDecoration = "underlined";
+            link.style.backgroundColor = "yellow";
+            link.style.border = "1px solid black";
+            link.style.borderRadius = "2px";
+            link.style.width = "35px";
+            link.innerText = "click";
+            // bind: remap to another object!
+            //  for assigning "this" keyword
+            //   usase in here: connect with JS Object and HTML
+            link.onclick = editor.alertTabs.bind(editor);
+            ul.appendChild(link);
+
+            return ul;
+        }
+
+        // 1. dot notation example removed
+
+        /*
+        2. property accessor notation e.g.
+        let editor2 = new Object();
+        editor2["name"] = "textedit";
+        editor2["version"] = 2;
+        editor2["needsUpdate"] = false;
+        editor2["tabs"] = ["tab1"];
+        
+        3. property initializer notation
+        let editor3 = {
+            name: "vscode",
+            version: 4,
+            needsUpdate: true,
+            tabs: ["tab1", "tab2", "tab3", "tab4"]
+        };
+        */
+
+        document.addEventListener("DOMContentLoaded", function (e) {
+            let editors = [editor1, editor2, editor3];
+            // editor1.alertTabs();
+            const content = document.getElementById("content");
+            for (let index = 0; index < editors.length; index++) {
+                const editor = editors[index];
+                const ul = makeEditorDetailsTag(editor);
+                content.appendChild(ul);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="content"></div>
+</body>
+
+</html>
