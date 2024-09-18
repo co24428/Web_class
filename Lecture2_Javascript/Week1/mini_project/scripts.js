@@ -2,7 +2,9 @@ const imgs = ["hat.png", "pants.png", "shoes.png", "table.png", "chair.png"];
 const quizImage = document.querySelector(".quizImage");
 const answerTextbox = document.querySelector(".userAnswer");
 const responseTextbox = document.querySelector(".response");
+const scoreText = document.querySelector(".score");
 const playButton = document.querySelector(".playBtn");
+
 let score = 0;
 let highScore = 0;
 
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 const used =[];  
 function getRandomNumber(limit, used){
-    const randomNumber = Math.round(Math.random() * limit);
+    const randomNumber = Math.round(Math.random() * (limit-1) );
     // randomNumber is not in used array
     if (used.indexOf(randomNumber) === -1){
         used.push(randomNumber);
@@ -29,21 +31,23 @@ let curruntImgIdx;
 function next(){
     let imgIdx;
     
-    while(used.length < imgs.length){
-        imgIdx = getRandomNumber(imgs.length, used);
-        if (imgIdx !== -1){
-            curruntImgIdx = imgIdx;
-            const imagePath = "img/" + imgs[imgIdx];
-            console.log(imagePath);
-            quizImage.src = imagePath;
-            break;
-        } 
-        // else {
-        //     console.log(quizImage.src);
-        //     alert("loop alert!!")
-        //     break; //...?!
-        // }
+    if (used.length === imgs.length){
+        alert("finish!!")
+        return 0;
+    } else {
+        while(true){
+            imgIdx = getRandomNumber(imgs.length, used);
+            if (imgIdx !== -1){
+                curruntImgIdx = imgIdx;
+                const imagePath = "img/" + imgs[imgIdx];
+                console.log(imagePath);
+                console.log(used);
+                quizImage.src = imagePath;
+                break;
+            }
+        }
     }
+    // while(used.length < imgs.length)
 
 }
 
@@ -53,11 +57,13 @@ function play(){
     const userAnswer = answerTextbox.value;
     const result = checkMatchedCharacter(correctAnswer, userAnswer);
     if (result){
-        responseTextbox.innerText = "You're right!! Get 3 Points!!"
+        responseTextbox.innerText = "You're right!! Get 3 Points!!";
+        score += 3;
     } else {
-        responseTextbox.innerText = "You're wrong.. Get -2 Points."
+        responseTextbox.innerText = "You're wrong.. Get -2 Points.";
+        score -= 2;
     }
-
+    updateScore()
 }
 
 function checkMatchedCharacter(str1, str2){
@@ -66,5 +72,8 @@ function checkMatchedCharacter(str1, str2){
     } else {
         return false;
     }
+}
 
+function updateScore(){
+    scoreText.innerText = score;
 }
