@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day1</title>
+</head>
+<body onload="alert('This page has loaded')">
+    <img id="myImage" src="../Week1/mini_project/img/shoes.png" width="50%" height="50%">
+    <button onfocus="myOnFocus(this)" onblur="myOnBlur(this)">
+        onfocus/onblur
+    </button>
+
+    <button onclick="createButtons(5, 'blue')">
+        create
+    </button>
+    <section style="margin-top: 50px;"></section>
+
+
+    <script>
+        const myImage = document.getElementById("myImage");
+        function myFunction(){
+            alert("This is test");
+        }
+        myImage.addEventListener("click", myFunction);
+        myImage.onmouseover = function() {
+            myImage.src = "../Week1/mini_project/img/hat.png"
+        }
+        myImage.onmouseout = function() {
+            myImage.src = "../Week1/mini_project/img/pants.png"
+        }
+
+        // onFocus - when we click it.
+        function myOnFocus(obj) { obj.style.background = "orange";}
+        // onBlur - when we leave the text box for example.
+        function myOnBlur(obj) { obj.style.background = "yellow";}
+
+        const sectionElement = document.getElementsByTagName("section")[0];
+        function createButtons(num, color) {
+            for (let i=0; i<num; i++){
+                sectionElement.appendChild(createMyDiv(color, i));
+            }
+        }
+        function createMyDiv(color, counter) {
+            const div = document.createElement("div");
+            div.style.backgroundColor = color;
+            div.style.height = "30px"; div.style.margin = "3px";
+            div.style.width = "30px"; div.style.cssFloat = "left";
+            div.style.cursor = "pointer"; div.draggable = "true";
+            div.onclick = () => {
+                alert("you clicked on a box #" + counter);
+            }
+            return div;
+
+        }
+    </script>
+</body>
+</html>
