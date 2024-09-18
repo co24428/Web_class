@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Quiz</title>
+    <style>
+        .image-container{
+            display: flex;
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 200px;
+            height: 200px;
+        }
+        .quizImage{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>With which letter does it start!</h1>
+    <div class="main-container">
+        <h2>Question number 1</h2>
+        <div class="image-container">
+            <img class="quizImage">
+        </div>
+        
+        <button class="playBtn" onclick="play()">play</button>
+        <button class="nextBtn" onclick="next()">next</button>
+        <input class="userAnswer" type="text">
+        <p class="response"></p>
+        <p class="score"></p>
+        <p class="highScore"></p>
+
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

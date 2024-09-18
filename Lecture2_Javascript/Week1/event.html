@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="mini_project/img/play.png">
+    <script>
+        const img = document.querySelector("img");
+
+        img.onclick = function() {
+            img.src = "mini_project/img/hat.png"
+        }
+        img.onmouseover = function() {
+            img.src = "mini_project/img/shoes.png"
+        }
+        img.onmouseout = function() {
+            img.src = "mini_project/img/table.png"
+        }
+    </script>
+
+    <button onclick="createButtons(5, 'blue')">
+        create
+    </button>
+    <section style="margin-top: 50px;"></section>
+    <script>
+        const sectionElement =
+        document.getElementsByTagName("section")[0];
+
+        function createButtons(num, color) {
+            for (let i = 0; i < num; i++) {
+                sectionElement.appendChild(createMyDiv(color, i));
+            }
+        }
+
+        function createMyDiv(color, counter) {
+            const div = document.createElement("div");
+            div.style.backgroundColor = color;
+            div.style.height = "30px"; div.style.margin = "3px";
+            div.style.width = "30px"; div.style.cssFloat = "left";
+            div.style.cursor = "pointer"; div.draggable = "true";
+            div.onclick = () =>
+            alert("you clicked on a box #" + counter);
+            return div;
+        }
+    </script>
+
+</body>
+</html>
