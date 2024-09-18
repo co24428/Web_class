@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>modal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+        }
+
+        /* .showModal{
+            background-color: #f44336;
+            filter: blur(3px)
+        } */
+        .bluredClass {
+            filter: blur(3px);
+        }
+
+        button {
+            background-color: #aabbcc; color: white;
+            padding: 14px 20px; margin: 10px 0;
+            width: 100%; cursor: pointer;
+        }
+        .btncancel, .btndelete { float: left; width: 50%;}
+        .btncancel {background-color: tomato; color: black;}
+        .btndelete {background-color: yellow; color: black;}
+
+        .container {
+            padding: 16px; text-align: center;
+        }
+        .modal {
+            display: none;
+            position: fixed; left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto; padding-top: 50px;
+            /* background-color: #474e5d; */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            border: 1px solid #aabbcc;
+            margin: 5% auto 15%; width: 80%
+        }
+
+        .close {
+            position: absolute;
+            right: 35px; top: 15px;
+            font-size: 50px; font-weight: bold;
+            color: #f1f1f1;
+        }
+        .close:hover, .close:focus {
+            color: #f44336; 
+            cursor: pointer;
+        }
+        hr {
+            border: 1px solid #f1f1f1; 
+            margin-bottom: 25px;
+        }
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <h2>Modal</h2>
+    <button class="showModal">
+        Open Modal
+    </button>
+    <div id="mymodal" class="modal">
+        <span class="close"
+            onclick="document.getElementById('mymodal').style.display='none'">x</span>
+        <form class="modal-content">
+            <div class="container">
+                <h1>Delete file?</h1>
+                <p>Are you sure you want to delete the file?</p>
+                <div class="clearfix">
+                    <button type="button" class="btncancel">Cancel</button>
+                    <button type="button" class="btndelete">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        const modal = document.getElementById('mymodal');
+        const showbtn = document.querySelector('.showModal');
+
+        document.querySelector(".showModal").addEventListener("click", showModal);
+        document.querySelector(".btncancel").addEventListener("click", hideModal);
+        document.querySelector(".btndelete").addEventListener("click", hideModal);
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape")
+            hideModal();
+        })
+
+        function hideModal() {
+            modal.style.display = 'none';
+            // showbtn.style.filter = "";
+            showbtn.classList.remove('bluredClass');
+        }
+        function showModal() {
+            modal.style.display = 'block';
+            // showbtn.style.filter = "blur(3px)";
+            showbtn.classList.add('bluredClass');
+        }
+    </script>
+</body>
+</html>
