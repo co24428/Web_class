@@ -85,7 +85,6 @@
         // allowed values for visibility are "visible" or "hidden"
         const allowed_values = ["visible","hidden"];
         if(!allowed_values.includes(value)) return;
-        
         const el = document.getElementById("popupContainer");
         if(value == "visible") {
             setPageContentBlur(true);
@@ -94,19 +93,55 @@
         }
         el.style.visibility = value;
     }
+
+    const popupContainerClick = (e) => { // e is the event object
+        alert("test")
+    }
+    
+    function addBackgroundClickEvent(){
+        const el = document.getElementById("pageContent");
+        // const el = document.getElementById("popupDialog");
+        el.addEventListener("click", popupContainerClick)
+    }
+    function removeBackgroundClickEvent(){
+        const el = document.getElementById("pageContent");
+        // const el = document.getElementById("popupDialog");
+        el.removeEventListener("click", popupContainerClick)
+    }
+
     function setupActions() {
+
         const dialogActions = document.getElementsByClassName("dialogAction");
         const yes = dialogActions[0];
         const no = dialogActions[1];
+
+        // yes.removeEventListener("click", () => {});
+        // no.removeEventListener("click", () => {});
+
+        yes.addEventListener("click", (e) =>{
+            yes.href = "https://en.wikipedia.org/wiki/Lorem_ipsum";
+            
+            yes.target = "_blank";
+            setPopupContainerDisplay("hidden");
+        })
+        yes.removeEventListener("click", () => {});
+        no.addEventListener("click", (e) => {
+            setPopupContainerDisplay("hidden");
+        })
         // document.location.href = "https://en.wikipedia.org/wiki/Lorem_ipsum";
     }
     document.addEventListener("DOMContentLoaded",(loadEvent) => {
+        setupActions();
+
         setPopupContainerDisplay("hidden");
         const link = document.getElementById('wiki');
         link.addEventListener("click",(clickEvent) => {
             clickEvent.preventDefault();
             setPopupContainerDisplay("visible");
+
+
         });
+
     });
 </script>
 </head>
