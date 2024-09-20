@@ -23,13 +23,12 @@
 <body>
     <h1>With which letter does it start!</h1>
     <div class="main-container">
-        <h2>Question number 1</h2>
+        <h2>Question number <span id="currentQuizNumber"></span>/<span id="totalQuizNumber"></span></h2>
         <div class="image-container">
             <img class="quizImage">
         </div>
         
-        <button class="playBtn" onclick="play()">play</button>
-        <button class="nextBtn" onclick="next()">next</button>
+        <button class="playBtn">play</button>
         <input class="userAnswer" type="text">
         <p class="response">Let's guess first letter of picture!</p>
         <p class="scoreText">Score: <span class="score">0</span></p>

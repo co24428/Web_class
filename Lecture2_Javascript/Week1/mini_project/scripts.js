@@ -5,11 +5,18 @@ const responseTextbox = document.querySelector(".response");
 const scoreText = document.querySelector(".score");
 const playButton = document.querySelector(".playBtn");
 
+
+const currentQuizNumberSpan = document.getElementById("currentQuizNumber");
+const totalQuizNumberSpan = document.getElementById("totalQuizNumber");
+
 let score = 0;
 let highScore = 0;
 
 document.addEventListener("DOMContentLoaded", () =>{
     quizImage.src = "img/play.png";
+    currentQuizNumberSpan.innerText = 0;
+    totalQuizNumberSpan.innerText = imgs.length;
+    playButton.addEventListener("click", next);
 })
 
 const used =[];  
@@ -27,6 +34,18 @@ function getRandomNumber(limit, used){
         return -1;
     }
 }
+
+function swapBtn(str){
+    playButton.innerText = str;
+    if (str === "next"){
+        playButton.removeEventListener("click", play);
+        playButton.addEventListener("click", next);
+    } else if (str === "play"){
+        playButton.removeEventListener("click", next);
+        playButton.addEventListener("click", play);
+    }
+}
+
 let curruntImgIdx;
 function next(){
     let imgIdx;
@@ -43,12 +62,12 @@ function next(){
                 console.log(imagePath);
                 console.log(used);
                 quizImage.src = imagePath;
+                setQuizNumber();
                 break;
             }
         }
     }
-    // while(used.length < imgs.length)
-
+    swapBtn("play");
 }
 
 function play(){
@@ -64,6 +83,9 @@ function play(){
         score -= 2;
     }
     updateScore()
+    swapBtn("next");
+    // finish game if (used.length === imgs.length)
+    // logging High score and reset game
 }
 
 function checkMatchedCharacter(str1, str2){
@@ -74,6 +96,14 @@ function checkMatchedCharacter(str1, str2){
     }
 }
 
+function setQuizNumber(){
+    currentQuizNumberSpan.innerText = used.length;
+}
+
 function updateScore(){
     scoreText.innerText = score;
+}
+
+function updateHighScore(){
+    console.log("test");
 }
