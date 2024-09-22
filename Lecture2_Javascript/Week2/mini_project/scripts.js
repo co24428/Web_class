@@ -3,6 +3,7 @@ const quizImage = document.querySelector(".quizImage");
 const answerTextbox = document.querySelector(".userAnswer");
 const responseTextbox = document.querySelector(".response");
 const scoreText = document.querySelector(".score");
+const highScoreText = document.querySelector(".highScore");
 const playButton = document.querySelector(".playBtn");
 
 
@@ -13,13 +14,11 @@ let score = 0;
 let highScore = 0;
 
 document.addEventListener("DOMContentLoaded", () =>{
-    quizImage.src = "img/play.png";
-    currentQuizNumberSpan.innerText = 0;
     totalQuizNumberSpan.innerText = imgs.length;
-    playButton.addEventListener("click", next);
+    resetGame();
 })
 
-const used =[];  
+let used =[];  
 function getRandomNumber(limit, used){
     const randomNumber = Math.round(Math.random() * (limit-1) );
     // randomNumber is not in used array
@@ -63,10 +62,12 @@ function next(){
                 console.log(used);
                 quizImage.src = imagePath;
                 setQuizNumber();
+                answerTextbox.value = "";
                 break;
             }
         }
     }
+    responseTextbox.innerText = "Let's guess first letter of picture!";
     swapBtn("play");
 }
 
@@ -84,8 +85,32 @@ function play(){
     }
     updateScore()
     swapBtn("next");
-    // finish game if (used.length === imgs.length)
     // logging High score and reset game
+    // finish game if (used.length === imgs.length)
+    // alert user's score with "your score is xxx, you beat the high score!"
+    if (used.length === imgs.length){
+        let resultmessage;
+        if (score > highScore){
+            updateHighScore(score);
+            resultmessage = `Your score is ${score}. You beat the high score!`;
+        } else {
+            resultmessage = `Your score is ${score}. Try again to get high score!`;
+        }
+        alert(resultmessage);
+        resetGame();
+    }
+}
+
+// resetGame: return to first state with play.png, and 0/5 quiz numbers
+// used array go to empty array
+function resetGame(){
+    quizImage.src = "img/play.png";
+    currentQuizNumberSpan.innerText = 0;
+    responseTextbox.innerText = "Let's guess first letter of picture!";
+    used = [];
+    playButton.addEventListener("click", next);
+    score = 0;
+    updateScore();
 }
 
 function checkMatchedCharacter(str1, str2){
@@ -104,6 +129,7 @@ function updateScore(){
     scoreText.innerText = score;
 }
 
-function updateHighScore(){
-    console.log("test");
+function updateHighScore(score){
+    highScore = score;
+    highScoreText.innerText = highScore;
 }
