@@ -122,3 +122,52 @@ greeting(B()); // greeting, guest
 greeting(C()); // greeting, false
 greeting(D()); // greeting, 
 greeting("Ian"); // greeting, Ian
+
+
+// array destructuring used in React?!
+const restaurant = {
+    name: "Hongdae Pocha",
+    food: "Korean",
+    year: 2012,
+    isOpened: true
+}
+
+const porperties = Object.keys(restaurant);
+const values = Object.values(restaurant);
+console.log(porperties);
+console.log(values);
+for (const [key, value] of Object.entries(restaurant)){
+    console.log(`${key}: ${value}`);
+}
+
+// set
+const mySet1 = new Set();
+mySet1.add(1);
+mySet1.add(5);
+mySet1.add(5);
+mySet1.add("text");
+console.log(mySet1);
+
+const o = {a:1, b:2};
+mySet1.add(o);
+mySet1.add({a:1, b:2}); // o is referencing a different object, so this is okay
+console.log(mySet1);
+
+const meals = new Set();
+meals.add("pasta");
+meals.add("pasta");
+meals.add("coke");
+meals.add("coke");
+console.log(meals);
+meals.add("soup");
+console.log(meals);
+
+const capitalAndCountry = new Map();
+capitalAndCountry.set('Seoul','Korea');
+capitalAndCountry.set('Tokyo','Japan');
+capitalAndCountry.set('Ottawa','Canada');
+console.log(capitalAndCountry);
+
+for (const [capital, country] of capitalAndCountry){
+    console.log(`${capital} is capital of ${country}`);
+}
