@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        body {
+            margin:0;padding:0;
+            width: 100%;
+            height: 100%;
+            background-color: lightblue;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+        }
+        #listContainer {
+            align-self: center;
+            width: 50%;
+            height: fit-content;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .item {
+            box-sizing: border-box;
+            padding: 10px;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background-color: darkslateblue;
+            margin-top: 10px;
+        }
+        form {
+            box-sizing: border-box;
+            align-self: center;
+            width: 50%;
+            height: 50px;
+            padding: 0;
+            margin: 0;
+        }
+        input[type="text"] {
+            box-sizing: border-box;
+            align-self: center;
+            width: 100%;
+            height: 50px;
+            font-size: large;
+        }
+    </style>
+    <script>
+    /*
+    list of countries used from:
+    http://www.geoba.se/population.php?aw=world&page=1
+    */
+    let listContainer = null;
+    let names = ['Russia', 'Antarctica', 'Canada', 'United States', 'China', 'Brazil', 'Australia', 'India', 'Argentina', 'Kazakhstan', 'Algeria', 'Democratic Republic of the Congo', 'Greenland', 'Mexico', 'Saudi Arabia', 'Indonesia', 'Sudan', 'Libya', 'Iran', 'Mongolia', 'Peru', 'Chad', 'Niger', 'Angola', 'Mali', 'South Africa', 'Colombia', 'Ethiopia', 'Bolivia', 'Mauritania', 'Egypt', 'Tanzania', 'Nigeria', 'Venezuela', 'Namibia', 'Pakistan', 'Mozambique', 'Turkey', 'Chile', 'Zambia', 'Myanmar', 'Afghanistan', 'South Sudan', 'Somalia', 'Central African Republic', 'Ukraine', 'Botswana', 'Madagascar', 'Kenya', 'France', 'Yemen', 'Thailand', 'Spain', 'Turkmenistan', 'Cameroon', 'Papua New Guinea', 'Sweden', 'Uzbekistan', 'Morocco', 'Iraq', 'Paraguay', 'Zimbabwe', 'Japan', 'Germany', 'Republic of Congo', 'Finland', 'Malaysia', 'Vietnam', 'Norway', 'Ivory Coast', 'Poland', 'Italy', 'Philippines', 'Ecuador', 'Burkina Faso', 'New Zealand', 'Gabon', 'Western Sahara', 'Guinea', 'United Kingdom', 'Ghana', 'Romania', 'Laos', 'Uganda', 'Guyana', 'Oman', 'Belarus', 'Kyrgyzstan', 'Senegal', 'Syria', 'Cambodia', 'Uruguay', 'Tunisia', 'Suriname', 'Bangladesh', 'Tajikistan', 'Nepal', 'Greece', 'Nicaragua', 'Eritrea'];
+    
+    function setupActions() {
+        const countryInput = document.forms.main.countryInput;
+        countryInput.addEventListener("keyup",(e) => {
+            makeList(countryInput.value,e.key);
+        });
+    }
+
+    function makeListContainer() {
+        // makes a container element only once
+        if(listContainer == null) {
+            listContainer = document.createElement("div");
+            listContainer.id = "listContainer";
+            document.body.appendChild(listContainer);
+        }
+    }
+
+    function isNullOrEmpty(value) {
+        // return true if value is null or value string is empty i.e. it is ""
+        return value == null || value.length == 0
+    }
+
+    function makeList(textValue,key) {
+        // clear parent
+        listContainer.replaceChildren();
+        // if input text or key is empty, do not run
+        // anything after the if condition
+        if(isNullOrEmpty(textValue) || isNullOrEmpty(key)) {
+            return;
+        }
+        // remember, names is the source of truth
+        // filteredNames filters names using textValue
+        const filteredNames = names.filter((value) => value.toLowerCase().startsWith(textValue.toLowerCase()));
+
+        // use filteredNames to create items
+        for (let idx = 0; idx < filteredNames.length; idx++) {
+            const name = filteredNames[idx];
+            const item = document.createElement("div");
+            item.classList.add("item");
+            listContainer.appendChild(item);
+            item.innerText = name;
+        }
+    }
+    document.addEventListener("DOMContentLoaded",(e) => {
+        makeListContainer();
+        setupActions();
+    });
+    </script>
+</head>
+<body>
+    <form name="main"><input type="text" name="countryInput" placeholder="country" /></form>
+</body>
+</html>
