@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Example Project</title>
+    <style>
+        .header {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0% 10%;
+            border: 1px solid grey;
+            height: auto;
+        }
+        .main-header {
+            text-align: center;
+            color: orange;
+        }
+        .search, .countryList {
+            width: 70%;
+            height: 30px;
+            margin: 10px 10px;
+            padding: 10px 30px;
+        }
+        /* for my code using div */
+        /* .country {
+            border: 1px solid black;
+            padding: 10px 30px;
+            background-color: lightgreen;
+        } */
+        /* for my code using ul and li */
+        .country {
+            list-style: none;
+
+            border: 1px solid black;
+            padding: 10px 30px;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">Search Example Project</h1>
+    <div class="container">
+        <h1 class="main-header">Countries</h1>
+        <input class="search" type="text" placeholder="Search for Country...">
+        <div class="countryList"></div>
+
+    </div>
+    
+    <script>
+        // const countries = ["Germany", "Poland", "America", "Romania", "Italy", "Canada"];
+        const countries = ["germany", "poland", "america", "romania", "italy", "canada", "colombia", "china", "chile"];
+        const countryList = document.querySelector(".countryList");
+        const searchText = document.querySelector(".search");
+        let filteredCountries = [];
+        let filterText = "";
+        
+        // // my code for using div each country
+        // function makeCountryList(){
+        //     countries.forEach(country => {
+        //         const element = document.createElement("div");
+        //         element.classList.add("country");
+        //         element.innerHTML = country;
+        //         countryList.appendChild(element);
+        //     });
+        // }
+        // class activity using ul and li each country
+        const ulForCountryList = document.createElement("ul");
+        function makeCountryList(){
+            countries.forEach(country => {
+                const liElement = document.createElement("li");
+                liElement.classList.add("country");
+                liElement.innerHTML = country;
+                ulForCountryList.appendChild(liElement);
+            })
+            countryList.appendChild(ulForCountryList);
+        }
+        // makeFilteredArray()
+        function makeFilteredArray(){
+            filteredCountries = [];
+            if (filterText !== ""){
+                filteredCountries = countries.filter((country) => country.startsWith(filterText));
+                console.log(filteredCountries)
+            }
+        }
+
+        function inputSearchKeydown(e){
+            const key = e.key;
+            if (key === "Backspace"){
+                filterText = filterText.slice(0,filterText.length-1);
+            } else if (key) {
+                filterText += e.key;
+            }
+            console.log(filterText)
+            makeFilteredArray();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            makeCountryList();
+
+            // what's different with "keyup" and "keydown"??
+            searchText.addEventListener("keyup", inputSearchKeydown);
+
+        })
+    </script>
+</body>
+</html>
