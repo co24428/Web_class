@@ -63,7 +63,22 @@ const reducer2 = (prev, curr) => prev + curr + 10;
 const sum = integers.reduce(reducer2);
 console.log(sum)
 
+const cart = [
+    {name: "Laptop", price: 900},
+    {name: "Laptop2", price: 1900},
+    {name: "Laptop3", price: 1200}
+]
+
+const totalPrice = cart.reduce((accumulator, item) => accumulator + item.price, 0);
+console.log(`totalPrice: ${totalPrice}`);
+
 // summary
+const arr = [5,6,7,8,9];
+console.log(arr.find(item => item>7));
+console.log(arr.filter(item => item>7));
+console.log(arr.some(item => item>7));
+console.log(arr.every(item => item>7));
+
 const meal1 = {
     "name": "sushi",
     "quantity": 4,
