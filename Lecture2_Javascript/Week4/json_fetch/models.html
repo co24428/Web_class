@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="models.js"></script>
+    <script src="urls.js"></script>
+    <script>
+      function headersToString(headers) {
+        let str = "";
+        for (const [k, v] of headers.entries()) {
+          str += `${k}:${v}`;
+        }
+        return str;
+      }
+
+      function fetchOneTodo() {
+        fetch("https://jsonplaceholder.typicode.com/todos/1")
+          .then((response) => {
+            if (!response.ok) {
+              // throw new Error(headersToString(response.headers));
+              throw new Error(`status code: ${response.status}`);
+            }
+            console.log(response);
+            console.log(typeof(response));
+            console.log(response instanceof Response)
+            return response.json();
+          })
+          .then((json) => console.log(json))
+          .catch((error) => console.log(error));
+      }
+
+      let results = null;
+      function fetchMultipleTodos() {
+        Promise.all(allUrls.map((url) => fetch(url)))
+          .then((responses) =>
+            Promise.all(responses.map((response) => response.json()))
+          )
+          .then((jsonObjects) => {
+            // results.concat(jsonObjects);
+            results = jsonObjects;
+            console.log(results);
+          });
+      }
+      fetchOneTodo();
+      // fetchMultipleTodos();
+    </script>
+  </head>
+
+  <body></body>
+</html>
