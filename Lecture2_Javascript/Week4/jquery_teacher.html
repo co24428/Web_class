@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #box {
+        position: absolute;
+        display: block;
+        width: 100px;
+        height: 100px;
+        background-color: blueviolet;
+      }
+    </style>
+    <!--
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script>
+      function animationCompleted() {
+        alert("animation completed");
+      }
+      $(document).ready(function () {
+        $("p:nth-child(even)").css("background-color", "yellow");
+        $("p:nth-child(even)").click((e) => {
+          alert(e.currentTarget.innerText);
+        });
+        $("#box").one("click", function () {
+          $("#box").animate(
+            { opacity: 0.75, left: "+=50", backgroundColor: "rgb(20,200,100)" },
+            5000,
+            animationCompleted
+          );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container" style="display: flex; flex-direction: column">
+      <p>Praesent at ex rutrum, dictum massa ut, lobortis metus.</p>
+      <p>Nullam quam nulla, feugiat non felis in, tempor vehicula mauris.</p>
+      <p>Sed tortor augue, ultricies id semper nec, vestibulum eu leo.</p>
+      <p>Aliquam scelerisque ac lorem pharetra consequat.</p>
+      <p>Duis aliquam fringilla lacus, quis mattis.</p>
+    </div>
+    <div id="box"></div>
+  </body>
+</html>

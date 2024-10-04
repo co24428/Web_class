@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        p {
+            border: 2px solid black;
+            width: 30%;
+        }
+    </style>
+    <script>
+        $(document).ready(() =>{
+
+            // $('p').click(function(){
+            //     alert('click');
+            // });
+            $('#show').click(function(){
+                $('p').show(1000);
+            });
+            $('#hide').click(function(){
+                $('p').hide(1000);
+            });
+            $('#toggle').click(function(){
+                $('p').toggle(500);
+            });
+            $("p").dblclick(function() {
+                alert("double click");
+            });
+            // $("p").hover(
+            //     function() { alert("You entered p1!"); },
+            //     function() { alert("Bye! You now leave p1!"); }
+            // );
+        });
+    </script>
+</head>
+<body>
+    <button id="hide">hide</button>
+    <button id="show">show</button>
+    <button id="toggle">toggle</button>
+    <p>asdasdasdasdasdas dasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</p>
+    <br>
+    <p>asdasdasdasdasdasda sdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</p>
+    <br>
+    <p>asdasdasdasdasdasdasdasdasdas dasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</p>
+    <br>
+    <p>asdasdasda sdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</p>
+    <br>
+    
+</body>
+</html>
