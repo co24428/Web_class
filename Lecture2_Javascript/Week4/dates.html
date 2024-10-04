@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      class Trip {
+        constructor(startDate, endDate) {
+          // startDate, endDate are received as string dates
+          // from html input type date
+          this.startDate = new Date(startDate);
+          this.endDate = new Date(endDate);
+          console.log(this.startDate.toISOString());
+          console.log(this.endDate.toISOString());
+        }
+        msToDays(value) {
+          // value in milliseconds to days
+          if (!Number.isFinite(value)) return 0;
+          const seconds = value / 1000;
+          if (Number.parseInt(seconds) == 0) return 0;
+          const hours = seconds / 3600;
+          const days = hours / 24;
+          return days;
+        }
+        showDetails() {
+          const c1 = this.startDate instanceof Date;
+          const c2 = this.endDate instanceof Date;
+          if (c1 && c2) {
+            const duration_ms =
+              this.endDate.getTime() - this.startDate.getTime();
+            const days = this.msToDays(duration_ms);
+            alert(`your trip has ${days} days!`);
+          } else {
+            alert("some data is invalid!");
+          }
+        }
+      }
+
+      function saveTrip() {
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+
+        let trip = new Trip(startDate, endDate);
+        trip.showDetails();
+      }
+    </script>
+    <style>
+      div#container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        gap: 10px;
+      }
+      div.tripRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="tripRow">
+        <label for="start">start date:</label>
+        <input
+          type="date"
+          id="startDate"
+          name="trip-start"
+          value="2028-01-01"
+          min="2028-01-01"
+          max="2028-12-31"
+        />
+      </div>
+      <div class="tripRow">
+        <label for="end">end date:</label>
+        <input
+          type="date"
+          id="endDate"
+          name="trip-end"
+          value="2028-01-05"
+          min="2028-01-01"
+          max="2028-12-31"
+        />
+      </div>
+      <input type="button" onclick="saveTrip()" value="save trip" />
+    </div>
+  </body>
+</html>

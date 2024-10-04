@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        const startDateForm = document.getElementById('startDate');
+        const endDateForm = document.getElementById('endDate');
+        const resultSpan = document.getElementById('result');
+
+        const calcNumOfdays = (d1, d2) => Math.abs(d1 - d2) / (1000 * 60 * 60 * 24);
+        // const startDate = startDateForm.value
+        function calculate(){
+            const startDate = new Date(startDateForm.value);
+            const endDate = new Date(endDateForm.value);
+            const difference = calcNumOfdays(startDate, endDate);
+            resultSpan.innerText = difference;
+        }
+    </script>
+    <script>
+        const arr = ['red', 'blue', 'green', 'black'];
+        const colors = () => {
+            const random = Math.floor(Math.random() *4);
+            document.body.style.backgroundColor = arr[random];
+        };
+        setTimeout(colors,2000);
+    </script>
+</head>
+<body>
+    <input type="date" id="startDate">
+    <br>
+    <input type="date" id="endDate">
+    <br>
+    <button id="calculate" onclick="calculate()">calculate</button>
+    <p>Date difference is <span id="result" style="font-weight: 700;">00</span> days</p>
+
+</body>
+</html>
