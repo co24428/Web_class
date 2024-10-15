@@ -40,8 +40,27 @@
     </style>
     <script src="models.js"></script>
     <script>
+        function register(event) {
+            event.preventDefault(); // Prevent form submission and refres
+            const email = $('#email').val();
+            const pwd = $('#pwd').val();
+            const verifyPwd = $('#verifyPwd').val();
+            const firstName = $('#firstName').val();
+            const lastName = $('#lastName').val();
+            const birthday = $('#birthday').val();
+            const newUser = new User(email, 
+                        pwd, 
+                        firstName, 
+                        lastName, 
+                        new Date(birthday));
+            localStorage.setItem(email, JSON.stringify(newUser));
+            window.location.href = "login.html";
+        }
+    </script>
+    <script>
         $(document).ready(() =>{
-            console.log('ian');
+
+            $('#registerBtn').click(register);
         });
     </script>
 </head>
@@ -67,8 +86,8 @@
                 <label for="pwd"><b>Password</b></label>
                 <input type="password" placeholder="Password" name="pwd" id="pwd" required>
                 
-                <label for="verifyPwd"><b>Verify password</b></label>
-                <input type="password" placeholder="Verify Password" name="verifyPwd" id="verifyPwd" required>
+                <!-- <label for="verifyPwd"><b>Verify password</b></label>
+                <input type="password" placeholder="Verify Password" name="verifyPwd" id="verifyPwd" required> -->
                 
                 <label for="firstName"><b>First name</b></label>
                 <input type="text" placeholder="First name" name="firstName" id="firstName" required>
