@@ -4,7 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="styles/navbar.css">
     <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        body{
+            background-color: beige;
+        }
+        .nav-links{
+            visibility: hidden;
+        }
+        #main-content{
+            padding-top: 80px;
+            margin-left: 30px;
+
+            display: flex;
+            flex-direction: column;
+        }
+        #main-content form{
+            margin: 20px 0px;
+        }
+        #registerForm{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        #registerForm input{
+            height: 40px;
+            width: 200px;
+        }
+        #registerBtn{
+            height: 30px;
+            width: 150px;
+            color: black;
+        }
+    </style>
     <script src="models.js"></script>
     <script>
         $(document).ready(() =>{
@@ -13,13 +46,43 @@
     </script>
 </head>
 <body>
-    <h1>Register</h1>
-    <p>id: <input type="text" id="userId" placeholder="email"><button>verify</button></p>
-    <p>password: <input type="text" id="userPassword" placeholder="password"></p>
-    <p>verify password: <input type="text" id="userPasswordDoubleCheck" placeholder="rewrite password"></p>
-    <p>first name: <input type="text" id="firstName" placeholder="first name"></p>
-    <p>last name: <input type="text" id="lastName" placeholder="last name"></p>
-    <p>birthday: <input type="date" id="birthday"></p>
-    <button id="registerBtn">Register</button>
+
+    <!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+    <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="#">[first name]</a></p>
+            <a href="login.html">Logout</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <h1>Register</h1>
+        <form method="post">
+            <div id="registerForm">
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Email" name="email" id="email" required>
+                <!-- <button>verify</button> -->
+
+                <label for="pwd"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="pwd" id="pwd" required>
+                
+                <label for="verifyPwd"><b>Verify password</b></label>
+                <input type="password" placeholder="Verify Password" name="verifyPwd" id="verifyPwd" required>
+                
+                <label for="firstName"><b>First name</b></label>
+                <input type="text" placeholder="First name" name="firstName" id="firstName" required>
+                
+                <label for="lastName"><b>Last name</b></label>
+                <input type="text" placeholder="Last name" name="lastName" id="lastName" required>
+                
+                <label for="birthday"><b>Birthday</b></label>
+                <input type="date" placeholder="Birthday" name="birthday" id="birthday" required>
+                
+                <button type="submit" id="registerBtn">Register</button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
