@@ -189,6 +189,18 @@
     </script>
     <script>
         $(document).ready(() => {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                const storedUser = localStorage.getItem(loggedInUser);
+                if (storedUser) {
+                    const user = JSON.parse(storedUser);
+                    $('.nav-links p a').text(user.firstName);
+                    
+                }
+            } else {
+                alert('Please log in first.')
+                window.location.href = 'login.html';
+            }
 
             getAllFlat();
         });
@@ -196,7 +208,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#toggle-sidebar').click(function () {
+            $('#toggle-sidebar').click(function() {
                 $('#sidebar').toggleClass('open');
 
                 // Change button text based on sidebar state
@@ -206,6 +218,10 @@
                     $('#toggle-sidebar').text('Show');
                 }
             });
+            $('#logout').click(function() {
+                // remove 'loggedInUser' in localStorage
+                localStorage.removeItem('loggedInUser');
+            })
         });
     </script>
 </head>
@@ -216,7 +232,7 @@
         <img id="logo" src="./img/logo.png" alt="Logo">
         <div class="nav-links">
             <p>Hello, <a href="#">[first name]</a></p>
-            <a href="login.html">Logout</a>
+            <a id="logout" href="login.html">Logout</a>
         </div>
     </div>
 
