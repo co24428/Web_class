@@ -9,15 +9,21 @@ class User {
     }
 }
 class Flat {
-    constructor(city, streetName, streetNumber, areaSize, hasAC, yearBuilt, rentPrice, DateAvailable){
+    constructor(city, streetName, streetNumber, floorLevel, squareMetreSize, hasAirConditioning, 
+                rentalPricePerMonth, leaseDurationInMonth, petsAllowed, DateAvailable){
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
-        this.areaSize = areaSize;
-        this.hasAC = hasAC;
-        this.yearBuilt = yearBuilt;
-        this.rentPrice = rentPrice;
+        this.floorLevel = floorLevel;
+        this.squareMetreSize = squareMetreSize;
+        this.hasAirConditioning = hasAirConditioning;
+        this.rentalPricePerMonth = rentalPricePerMonth;
+        this.leaseDurationInMonth = leaseDurationInMonth;
+        this.petsAllowed = petsAllowed;
         this.DateAvailable = DateAvailable;
+    }
+    makeStringId(){
+        return `${this.streetName}_${this.streetNumber}_${this.floorLevel}`
     }
 }
 class Validator {
@@ -83,11 +89,20 @@ class Validator {
             return true;
         }
     }
+    checkPassword(password){
+        // condition 1) Letters
+        // condition 2) Numbers
+        // condition 3) character that is neither a letter nor a number
+        const c1 = /\d+/.test(password);
+        const c2 = /[a-zA-Z]/.test(password);
+        const c3 = /[?=.*[!@#$%^&*]/.test(password);
+        return c1 && c2 && c3;
+    }
 }
 
 // const ian = new User('ian@gmail.com', 'pwd', 'ian', 'kim', null);
 const ian = new User('ian@gmail.com', 
-                        'pwd', 
+                        'pwdpwdpwd', 
                         'ian', 
                         'kim', 
                         new Date('2000/03/14'));
@@ -141,12 +156,16 @@ console.log('--- checkLength');
 
 const result31 = validation.checkLength(ian.firstName,2);
 const result32 = validation.checkLength(ian.lastName,2);
+const result33 = validation.checkLength(ian.password,6);
 console.log(result31);
 console.log(result32);
-const result33 = validation.checkLength(wrongUser2.firstName,2);
-const result34 = validation.checkLength(wrongUser2.lastName,2);
 console.log(result33);
+const result34 = validation.checkLength(wrongUser2.firstName,2);
+const result35 = validation.checkLength(wrongUser2.lastName,2);
+const result36 = validation.checkLength(wrongUser2.password,6);
 console.log(result34);
+console.log(result35);
+console.log(result36);
 
 console.log('--- checkAge');
 const result5 = validation.checkAge(ian.birthday, 18, 120);

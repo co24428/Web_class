@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        body{
+            background-color: beige;
+        }
+        #main-content{
+            padding-top: 80px;
+            border: 1px solid red;
+            margin-left: 30px;
+
+            display: flex;
+            flex-direction: column;
+        }
+        #main-content form{
+            margin: 20px 0px;
+        }
+        #loginForm{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        #loginForm input{
+            height: 40px;
+            width: 200px;
+        }
+        #loginBtn, #registerBtn{
+            height: 30px;
+            width: 150px;
+            color: purple;
+        }
+        #registerBtn a{
+            text-decoration: none;
+        }
+        #registerBtn a{
+            color: purple;
+        }
+        #registerBtn a:visited{
+            color: purple;
+        }
+    </style>
+
+    <script src="models.js"></script>
+    <script>
+        class LoginValidator{
+            checkLogin(id, pw){
+                // id(email) is key in localStorage
+                // A User class is in localStorage
+                const iscorrectId = localStorage.getItem(id);
+                if (iscorrectId){
+                    const user = JSON.parse(iscorrectId);
+                    if (pw === user.password){
+                        // go to allFlat page
+                        window.location.href = "allFlat.html";
+                    } else {
+                        this.alertWrongAccount();
+                        // console.log('wrong password')
+                    }
+                } else {
+                    // this.alertWrongAccount();
+                    console.log('wrong id')
+                }
+            }
+            alertWrongAccount(){
+                alert('wrong id or password!');
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(() =>{
+            const ian = new User('ian@gmail.com', 
+                        'pwdpwdpwd', 
+                        'ian', 
+                        'kim', 
+                        new Date('2000/03/14'));
+            console.log(ian);
+            $('#loginBtn').click(function(){
+                event.preventDefault(); // Prevent form submission and refresh
+
+                const loginValidator = new LoginValidator();
+                const email = $('#email').val();
+                const pwd = $('#pwd').val();
+                loginValidator.checkLogin(email, pwd);
+
+                localStorage.setItem('loggedInUser', email);
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+    <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="#">[first name]</a></p>
+            <a href="login.html">Logout</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <h1>Login</h1>
+        <form method="post">
+            <div id="loginForm">
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Email" name="email" id="email" required>
+
+                <label for="pwd"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="pwd" id="pwd" required>
+
+                <button type="submit" id="loginBtn">Login</button>
+            </div>
+        </form>
+        <p>If you haven't registered?</p>
+        <button id="registerBtn"><a href="register.html">Create an accout</a></button>
+    </div>
+</body>
+</html>
