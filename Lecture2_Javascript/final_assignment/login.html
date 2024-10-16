@@ -60,12 +60,8 @@
                         window.location.href = "allFlat.html";
                     } else {
                         this.alertWrongAccount();
-                        // console.log('wrong password')
                     }
-                } else {
-                    // this.alertWrongAccount();
-                    console.log('wrong id')
-                }
+                } else {}
             }
             alertWrongAccount(){
                 alert('wrong id or password!');
@@ -74,12 +70,6 @@
     </script>
     <script>
         $(document).ready(() =>{
-            const ian = new User('ian@gmail.com', 
-                        'pwdpwdpwd', 
-                        'ian', 
-                        'kim', 
-                        new Date('2000/03/14'));
-            console.log(ian);
             $('#loginBtn').click(function(){
                 event.preventDefault(); // Prevent form submission and refresh
 

@@ -43,12 +43,17 @@
     <script>
         function register(event) {
             event.preventDefault(); // Prevent form submission and refres
+
             const email = $('#email').val();
             const pwd = $('#pwd').val();
             const verifyPwd = $('#verifyPwd').val();
             const firstName = $('#firstName').val();
             const lastName = $('#lastName').val();
             const birthday = $('#birthday').val();
+            if(!validateInformation(email, pwd, firstName, lastName, birthday)){
+                return 0;
+            }
+
             const newUser = new User(email, 
                         pwd, 
                         firstName, 
@@ -56,6 +61,41 @@
                         new Date(birthday));
             localStorage.setItem(email, JSON.stringify(newUser));
             window.location.href = "login.html";
+            alert('Register successed!');
+        }
+        function validateInformation(email, pwd, firstName, lastName, birthday){
+            const validator = new Validator();
+
+            if (!validator.validateEmail(email)){
+                alert('Check your email.')
+                return false;
+            }
+            if (!validator.checkLength(pwd,6)){
+                alert('Password must be at least 6 characters long.')
+                return false;
+            }
+            if (!validator.checkPassword(pwd)){
+                alert('Password must contain Letters, Numbers, and a character thatis neither a letter nor a number.')
+                return false;
+            }
+            if (!validator.checkLength(firstName,2)){
+                alert('First name must be at least 2 characters long.')
+                return false;
+            }
+            if (!validator.checkLength(lastName,2)){
+                alert('Last name must be at least 2 characters long.')
+                return false;
+            }
+            if (!validator.checkAge(new Date(birthday),18,120)){
+                alert('Age must be in the range of 18 to 120.')
+                return false;
+            }
+            // validator.areNotEmpty(email, pwd, verifyPwd, firstName, lastName, birthday)
+            if (!validator.areNotEmpty(email, pwd, firstName, lastName, birthday)){
+                alert('Write down all of forms.')
+                return false;
+            }
+            return true;
         }
     </script>
     <script>

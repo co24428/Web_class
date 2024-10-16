@@ -44,9 +44,10 @@ localStorage.setItem(flat5.makeStringKey(), JSON.stringify(flat5));
 
 class Validator {
     isNotEmpty(v){
-        const c1 = v != null;
-        const c2 = v != undefined;
-        return (c1 && c2);
+        const c1 = (v != null);
+        const c2 = (v != undefined);
+        const c3 = (v != '');
+        return (c1 && c2 && c3);
 
     }
     areNotEmpty(...v){
@@ -79,13 +80,9 @@ class Validator {
     }
     validateEmail(input) {
         var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (input.match(validRegex)) {
-            console.log("Valid email address!");
-            // document.form1.text1.focus();
+        if (validRegex.test(input)) {
             return true;
         } else {
-            console.log("Invalid email address!");
-            // document.form1.text1.focus();
             return false;
         }
     }
