@@ -21,15 +21,9 @@
             padding: 10px;
             margin: 10px;
         }
-        .allflats {
-            height: 2000px;
-            /* padding-top: 80px; */
-            border: 2px red solid;
-        }
 
         .flat {
             display: flex;
-            border: 2px orange solid;
             /* height: 100px; */
             /* height: inherit; */
             margin: 30px 30px;
@@ -46,28 +40,6 @@
 
         .flatDetail{
             margin: 5px;
-        }
-
-        /* help icon */
-        .help {
-            position: fixed;
-            /* position: fixed; */
-            bottom: 10px;
-            right: 10px;
-            z-index: 1000; /* Keep the button on top */
-        }
-
-        .help>button {
-            display: block;
-            width: 70px;
-            height: 70px;
-            background-color: green;
-            border: white solid 2px;
-            border-radius: 50%;
-        }
-
-        .help>button:hover {
-            background-color: yellowgreen;
         }
     </style>
     <style>
@@ -120,8 +92,8 @@
         /* Toggle Button Styling */
         #toggleBtn {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             padding: 10px 20px;
             background-color: rgb(194, 194, 175);
             border: none;
@@ -143,9 +115,6 @@
         function getAllFlat() {
             const items = [];
             for (let i = 0; i < localStorage.length; i++) {
-                console.log(i);
-                console.log(localStorage.key(i));
-                console.log(localStorage.getItem(localStorage.key(i)));
                 try{
                     const item = JSON.parse(localStorage.getItem(localStorage.key(i)));
                     // console.log(item instanceof Flat); // cannot get original Object type.. :(
@@ -159,7 +128,6 @@
             return items;
         }
         function makeFlatDiv(flat) {
-            console.log(flat);
             const allFlatsDiv = document.querySelector('.allflats');
 
             const flatEl = document.createElement('div');
@@ -182,9 +150,6 @@
             allFlatsDiv.appendChild(flatEl);
 
         }
-        function makeImgEl(target, img) {
-            img.classList.add("rentalImage");
-        }
         function makeTextEl(target, key, value) {
             const textEl = document.createElement('p');
             textEl.innerText = `${key}: ${value}`;
@@ -193,32 +158,6 @@
     </script>
     <script>
         // sort & filter
-        function sortByCity(){
-            const sortedFlats = [];
-            // 0. set up cities list from allFlats
-            // cities, not used now
-
-            // 1. delete all flat divs
-            $('.flat').remove();
-
-            // 2. get target city and specific flat
-            const target = $('#sortByCity').val();
-            if (target == ''){
-                showedFlats.forEach(flat => {
-                    if (flat.city.toLowerCase().includes(target.toLowerCase())){
-                        sortedFlats.push(flat);
-                    }
-                });
-            } else if (target != ''){
-                sortedFlats = allFlats;
-            }
-            showedFlats = sortedFlats;
-            
-            // 3. set up flat divs
-            showedFlats.forEach(item => {
-                makeFlatDiv(item); 
-            });
-        }
         function sortByPrice(){
             // 1. delete all flat divs
             $('.flat').remove();
@@ -260,37 +199,103 @@
         }
 
 
+        function filterByCity(){
+            let filteredFlats = [];
+            // 0. set up cities list from allFlats
+            // cities, not used now
+
+            // 1. delete all flat divs
+            $('.flat').remove();
+
+            // 2. get target city and specific flat
+            const target = $('#filterByCity').val();
+            if (target != ''){
+                allFlats.forEach(flat => {
+                    if (flat.city.toLowerCase().includes(target.toLowerCase())){
+                        filteredFlats.push(flat);
+                    }
+                });
+            } else if (target == ''){
+                filteredFlats = allFlats;
+            }
+            showedFlats = filteredFlats;
+            
+            // 3. set up flat divs
+            filteredFlats.forEach(item => {
+                makeFlatDiv(item); 
+            });
+        }
         // function FilterByPrice(min, max, onoff){
         // function FilterByPrice(min, max){
         function FilterByPrice(){
-            const filteredFlats = [];
-            let min = $('#minPrice').val();
-            let max = $('#maxPrice').val();
+            let filteredFlats = [];
+            const min = $('#minPrice').val();
+            const max = $('#maxPrice').val();
             const checkMin = (min == '');
             const checkMax = (max == '');
 
-            if (checkMax && checkMax){
-                return;
+            if (checkMax && checkMin){
+                filteredFlats = allFlats;
             } else if (checkMax){ // only Min is inserted
                 allFlats.forEach(flat => {
-                    if (flat.rentalPricePerMonth > min){
+                    if (flat.rentalPricePerMonth >= Number.parseInt(min)){
                         filteredFlats.push(flat);
                     }
                 });
             } else if (checkMin){ // only Max is inserted
                 allFlats.forEach(flat => {
-                    if (flat.rentalPricePerMonth < max){
+                    if (flat.rentalPricePerMonth <= Number.parseInt(max)){
                         filteredFlats.push(flat);
                     }
                 });
             } else { // both are inserted
                 allFlats.forEach(flat => {
-                    if ((flat.rentalPricePerMonth > min) && (flat.rentalPricePerMonth < max)){
+                    if ((flat.rentalPricePerMonth >= Number.parseInt(min)) && (flat.rentalPricePerMonth <= Number.parseInt(max))){
                         filteredFlats.push(flat);
                     }
                 });
             }
+            showedFlats = filteredFlats;
+            
+            $('.flat').remove();
+            filteredFlats.forEach(item => {
+                makeFlatDiv(item); 
+            });
+        }
+        function FilterByAreaSize(){
+            let filteredFlats = [];
+            const min = $('#minAreaSize').val();
+            const max = $('#maxAreaSize').val();
+            const checkMin = (min == '');
+            const checkMax = (max == '');
 
+            if (checkMax && checkMin){
+                filteredFlats = allFlats;
+            } else if (checkMax){ // only Min is inserted
+                allFlats.forEach(flat => {
+                    if (flat.squareMetreSize >= Number.parseInt(min)){
+                        filteredFlats.push(flat);
+                    }
+                });
+            } else if (checkMin){ // only Max is inserted
+                allFlats.forEach(flat => {
+                    if (flat.squareMetreSize <= Number.parseInt(max)){
+                        filteredFlats.push(flat);
+                    }
+                });
+            } else { // both are inserted
+                allFlats.forEach(flat => {
+                    if ((flat.squareMetreSize >= Number.parseInt(min)) && (flat.squareMetreSize <= Number.parseInt(max))){
+                        filteredFlats.push(flat);
+                    }
+                });
+            }
+            showedFlats = filteredFlats;
+            
+            $('.flat').remove();
+            filteredFlats.forEach(item => {
+                makeFlatDiv(item); 
+            });
         }
 
     </script>
@@ -314,6 +319,10 @@
                 alert('Please log in first.')
                 window.location.href = 'login.html';
             }
+            $('#logo').click(function() {
+                window.location.href = 'allFlat.html';
+            });
+            
 
             allFlats = getAllFlat();
             showedFlats = allFlats;
@@ -358,13 +367,6 @@
         <div class="allflats"></div>
     </div>
 
-    <!-- <div class="help">
-        <button>
-            <img src="./img/plus.png" alt="help" width="20" height="20">
-        </button>
-    </div> -->
-
-    <!-- sidebar_reference.html -->
     <!-- Sidebar for filter -->
 
     <!-- filter: city, price range, area size range -->
@@ -373,12 +375,6 @@
         <ul>
             <li><a href="#">favourite</a></li>
             <li><h2>Sort</h2></li>
-            <li>
-                <p style="font-size: 20px; ">City
-                    <input type="text" id="sortByCity" style="width: 70px;" placeholder="city">
-                    <button style="margin-left: 4px;" onclick="sortByCity()">apply</button>
-                </p>
-            </li>
             <li>
                 <p style="font-size: 20px; ">Price
                     <button style="margin-left: 4px;" onclick="sortByPrice()">apply</button>
@@ -392,6 +388,12 @@
 
             <li><h2>Filter</h2></li>
             <li>
+                <p style="font-size: 20px; ">City
+                    <input type="text" id="filterByCity" style="width: 70px;" placeholder="city">
+                    <button style="margin-left: 4px;" onclick="filterByCity()">apply</button>
+                </p>
+            </li>
+            <li>
                 <p style="font-size: 20px;">Price</p>
                 <p><input type="number" id="minPrice" placeholder="min"> ~
                     <input type="number" id="maxPrice" placeholder="max">
@@ -402,13 +404,14 @@
                 <p style="font-size: 20px;">Area Size</p>
                 <p><input type="number" id="minAreaSize" placeholder="min"> ~
                     <input type="number" id="maxAreaSize" placeholder="max">
+                    <button onclick="FilterByAreaSize()">apply</button>
                 </p>
             </li>
         </ul>
     </div>
 
     <!-- Toggle Button -->
-    <!-- <button id="toggleBtn" class="toggleBtn">Filter</button> -->
+
     <button id="toggleBtn">Filter</button>
 </body>
 
