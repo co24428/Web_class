@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Update</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        body{
+            background-color: beige;
+        }
+        .nav-links{
+            visibility: hidden;
+        }
+        #main-content{
+            padding-top: 80px;
+            margin-left: 30px;
+
+            display: flex;
+            flex-direction: column;
+        }
+        #main-content form{
+            margin: 20px 0px;
+        }
+        #updateForm{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        #updateForm input{
+            height: 40px;
+            width: 200px;
+        }
+        #updateBtn{
+            height: 30px;
+            width: 150px;
+            color: black;
+            cursor: pointer;
+        }
+    </style>
+    <script src="models.js"></script>
+    <script>
+        function setupInformation(user){
+            const email = user.email;
+            const firstName = user.firstName;
+            const lastName = user.lastName;
+            const birthday = user.birthday.slice(0,10);
+            
+            $('#email').val(email);
+            $('#firstName').val(firstName);
+            $('#lastName').val(lastName);
+            $('#birthday').val(birthday);
+        }
+        function updateInformation(){
+            event.preventDefault();
+
+            const storedUser = localStorage.getItem(loggedInUser);
+            const user = JSON.parse(storedUser);
+            console.log(user)
+
+            user.email = $('#email').val();
+            user.firstName = $('#firstName').val();
+            user.lastName = $('#lastName').val();
+            user.birthday = new Date($('#birthday').val());
+            if ($('#pwd').val() != ''){
+                user.password = $('#pwd').val();
+            }
+
+            localStorage.setItem(user.email, JSON.stringify(user));
+            window.location.href = "allFlat.html";
+        }
+    </script>
+    <script>
+        let loggedInUser;
+        $(document).ready(() =>{
+            loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                const storedUser = localStorage.getItem(loggedInUser);
+                if (storedUser) {
+                    const user = JSON.parse(storedUser);
+                    setupInformation(user);
+                }
+            } else {
+                alert('Please log in first.')
+                window.location.href = 'login.html';
+            }
+
+            $('#updateBtn').click(updateInformation);
+        });
+    </script>
+</head>
+<body>
+
+    <!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+    <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="#">[first name]</a></p>
+            <a href="login.html">Logout</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <h1>Profile Update</h1>
+        <form method="post">
+            <div id="updateForm">
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Email" name="email" id="email" required readonly>
+
+                <label for="pwd"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="pwd" id="pwd">
+                
+                <label for="firstName"><b>First name</b></label>
+                <input type="text" placeholder="First name" name="firstName" id="firstName" required>
+                
+                <label for="lastName"><b>Last name</b></label>
+                <input type="text" placeholder="Last name" name="lastName" id="lastName" required>
+                
+                <label for="birthday"><b>Birthday</b></label>
+                <input type="date" placeholder="Birthday" name="birthday" id="birthday" required>
+                
+                <button type="submit" id="updateBtn">Update</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
