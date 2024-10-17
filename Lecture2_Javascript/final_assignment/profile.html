@@ -10,9 +10,6 @@
         body{
             background-color: beige;
         }
-        .nav-links{
-            visibility: hidden;
-        }
         #main-content{
             padding-top: 80px;
             margin-left: 30px;
@@ -79,6 +76,7 @@
                 const storedUser = localStorage.getItem(loggedInUser);
                 if (storedUser) {
                     const user = JSON.parse(storedUser);
+                    $('.nav-links p a').text(user.firstName);
                     setupInformation(user);
                 }
             } else {
@@ -98,6 +96,7 @@
         <div class="nav-links">
             <p>Hello, <a href="#">[first name]</a></p>
             <a href="login.html">Logout</a>
+            <a href="allFlat.html">Go back</a>
         </div>
     </div>
 

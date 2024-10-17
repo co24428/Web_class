@@ -20,9 +20,7 @@
             visibility: visible;
         }
         #main-content{
-            height: 2000px;
             padding-top: 80px;
-
         }
         #createNewFlatBtn{
             padding: 10px;
@@ -30,9 +28,8 @@
         }
 
         .flat {
+            position: relative; /* for layout */
             display: flex;
-            /* height: 100px; */
-            /* height: inherit; */
             margin: 30px 30px;
         }
 
@@ -48,6 +45,20 @@
 
         .flatDetail{
             margin: 5px;
+        }
+        .favouriteBtn{
+            position: absolute; /* for layout */
+            top: 15px;
+            right: 250px;
+            padding: 10px 20px;
+            background-color: yellow;
+            border: 1px solid yellowgreen;
+        }
+        .favouriteBtn:hover {
+            background-color: red;
+        }
+        .favouriteFlat{
+            border: 2px solid blueviolet;
         }
     </style>
     <style>
@@ -161,6 +172,14 @@
                 makeTextEl(flatDetail, flatComponents[i], flat[flatComponents[i]]);
             }
 
+            const favouriteBtn = document.createElement('button');
+            favouriteBtn.classList.add('favouriteBtn');
+            if (checkFavourite(flat)){
+                favouriteBtn.classList.add('favouriteFlat');
+            }
+            favouriteBtn.innerText = 'favourite';
+            flatEl.appendChild(favouriteBtn);
+
             allFlatsDiv.appendChild(flatEl);
 
         }
@@ -168,6 +187,19 @@
             const textEl = document.createElement('p');
             textEl.innerText = `${key}: ${value}`;
             target.appendChild(textEl);
+        }
+        function checkFavourite(flat){
+            // get FavouriteList
+            const user = JSON.parse(localStorage.getItem(loggedInUser));
+            const favouriteFlats = user.favouriteFlats;
+
+            const flatId = `${flat.city}_${flat.streetName}_${flat.streetNumber}_${flat.floorLevel}`;
+
+            if (favouriteFlats.includes(flatId)){
+                return true;
+            } else {
+                return false;
+            }
         }
     </script>
     <script>
@@ -181,12 +213,13 @@
         }
     </script>
     <script>
-        let allFlats;
-        let showedFlats;
+        let allFlats = [];
+        let showedFlats = [];
         let cities = [];
         let loggedInUser;
         let isAscforPrice = false;
         let isAscforAreaSize = false;
+        let favouriteFilterOnOff = false;
         $(document).ready(() => {
             loggedInUser = localStorage.getItem('loggedInUser');
             if (loggedInUser) {
@@ -201,7 +234,6 @@
                         $('#createNewFlatBtn').addClass('hidden');
                         $('#createNewFlatBtn').removeClass('visable');
                     }
-                    
                 }
             } else {
                 alert('Please log in first.')
@@ -232,11 +264,61 @@
                 localStorage.removeItem('loggedInUser');
             })
 
-
             $('#createNewFlatBtn').click(e =>{
                 window.location.href= 'newFlat.html';
             });
+
+            $('.favouriteBtn').click(e =>{
+                // get target flat object
+                const city = (e.target.closest('.flat').getElementsByTagName('p')[0].innerText).split(' ')[1];
+                const streetName = (e.target.closest('.flat').getElementsByTagName('p')[1].innerText).split(' ')[1];
+                const streetNumber = (e.target.closest('.flat').getElementsByTagName('p')[2].innerText).split(' ')[1];
+                const floorLevel = (e.target.closest('.flat').getElementsByTagName('p')[3].innerText).split(' ')[1];
+                const flatId = `${city}_${streetName}_${streetNumber}_${floorLevel}`;
+                const flatObj = JSON.parse(localStorage.getItem(flatId));
+
+                // get FavouriteList
+                const user = JSON.parse(localStorage.getItem(loggedInUser));
+                let favouriteFlats = user.favouriteFlats;
+
+                // check target is in favouriteList
+                if (!favouriteFlats.includes(flatId)){
+                    // process when it's not included in favourite list
+                    $(e.target).addClass('favouriteFlat');
+                    favouriteFlats.push(flatId);
+                } else {
+                    // process when it's included in favourite list
+                    $(e.target).removeClass('favouriteFlat');
+                    favouriteFlats = favouriteFlats.filter(item => item !== flatId);
+                }
+                user.favouriteFlats = favouriteFlats;
+                localStorage.setItem(user.email, JSON.stringify(user));
+            });
+            $('#favouriteFilter').click(FilterByFavourite);
         });
+
+        function FilterByFavourite(){
+            const user = JSON.parse(localStorage.getItem(loggedInUser));
+            let favouriteFlats = user.favouriteFlats;
+            console.log('asdsadasd');
+
+            $('.flat').remove();
+            if (!favouriteFilterOnOff) {
+                // process when turn on
+                allFlats.forEach(flat => {
+                    if (checkFavourite(flat)){
+                        makeFlatDiv(flat); 
+                    }
+                });
+                favouriteFilterOnOff = true;
+            } else {
+                // process when turn off
+                allFlats.forEach(flat => {
+                    makeFlatDiv(flat); 
+                });
+                favouriteFilterOnOff = false;
+            }
+        }
     </script>
 </head>
 
@@ -261,7 +343,7 @@
     <!-- sort: city, price, area size -->
     <div id="sidebar">
         <ul>
-            <li><a href="#">favourite</a></li>
+            <li><a id="favouriteFilter" href="#">favourite</a></li>
             <li><h2>Sort</h2></li>
             <li>
                 <p style="font-size: 20px; ">Price

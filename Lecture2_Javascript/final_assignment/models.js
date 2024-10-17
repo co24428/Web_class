@@ -1,14 +1,21 @@
 
 class User {
-    constructor(email, password, firstName, lastName, birthday, isAdmin){
+    constructor(email, password, firstName, lastName, birthday, isAdmin, favouriteFlats = []){
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.isAdmin = isAdmin;
+        this.favouriteFlats = favouriteFlats;
     }
 }
+
+
+// const user1 = new User('test@test.com', '1q2w3e!', 'TEST123', 'Choi', new Date(1997,10,12), true);
+// const user2 = new User('ian@gmail.com', 'pwdpwd', 'ian', 'Kim', new Date(1991,10,12), false);
+// localStorage.setItem(user1.email, JSON.stringify(user1));
+// localStorage.setItem(user2.email, JSON.stringify(user2));
 
 class Flat {
     constructor(city, streetName, streetNumber, floorLevel, squareMetreSize, hasAirConditioning, 
@@ -29,16 +36,16 @@ class Flat {
         return `${this.city}_${this.streetName}_${this.streetNumber}_${this.floorLevel}`
     }
 }
-const flat1 = new Flat('Vancouver', 'Granville', 2323, 4, 33, true, 1200, 12, false, './img/flat1.png', new Date(2024,10,1));
-const flat2 = new Flat('Vancouver', 'Howe', 223, 13, 53, true, 1800, 17, false, './img/flat2.png', new Date(2024,11,1));
-const flat3 = new Flat('Vancouver', 'Howe', 213, 1, 83, true, 1800, 5, true, './img/flat3.png', new Date(2024,11,15));
-const flat4 = new Flat('Toronto', 'this', 273, 4, 75, true, 2300, 2, false, './img/flat1.png', new Date(2024,10,1));
-const flat5 = new Flat('Toronto', 'that', 273, 19, 51, true, 2000, 2, false, './img/flat2.png', new Date(2024,10,1));
-localStorage.setItem(flat1.makeStringKey(), JSON.stringify(flat1));
-localStorage.setItem(flat2.makeStringKey(), JSON.stringify(flat2));
-localStorage.setItem(flat3.makeStringKey(), JSON.stringify(flat3));
-localStorage.setItem(flat4.makeStringKey(), JSON.stringify(flat4));
-localStorage.setItem(flat5.makeStringKey(), JSON.stringify(flat5));
+// const flat1 = new Flat('Vancouver', 'Granville', 2323, 4, 33, true, 1200, 12, false, './img/flat1.png', new Date(2024,10,1));
+// const flat2 = new Flat('Vancouver', 'Howe', 223, 13, 53, true, 1800, 17, false, './img/flat2.png', new Date(2024,11,1));
+// const flat3 = new Flat('Vancouver', 'Howe', 213, 1, 83, true, 1800, 5, true, './img/flat3.png', new Date(2024,11,15));
+// const flat4 = new Flat('Toronto', 'this', 273, 4, 75, true, 2300, 2, false, './img/flat1.png', new Date(2024,10,1));
+// const flat5 = new Flat('Toronto', 'that', 273, 19, 51, true, 2000, 2, false, './img/flat2.png', new Date(2024,10,1));
+// localStorage.setItem(flat1.makeStringKey(), JSON.stringify(flat1));
+// localStorage.setItem(flat2.makeStringKey(), JSON.stringify(flat2));
+// localStorage.setItem(flat3.makeStringKey(), JSON.stringify(flat3));
+// localStorage.setItem(flat4.makeStringKey(), JSON.stringify(flat4));
+// localStorage.setItem(flat5.makeStringKey(), JSON.stringify(flat5));
 
 
 
