@@ -1,13 +1,15 @@
 
 class User {
-    constructor(email, password, firstName, lastName, birthday){
+    constructor(email, password, firstName, lastName, birthday, isAdmin){
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        this.isAdmin = isAdmin;
     }
 }
+
 class Flat {
     constructor(city, streetName, streetNumber, floorLevel, squareMetreSize, hasAirConditioning, 
                 rentalPricePerMonth, leaseDurationInMonth, petsAllowed, imgLink, DateAvailable){
@@ -23,8 +25,6 @@ class Flat {
         this.imgLink = imgLink;
         this.DateAvailable = DateAvailable;
     }
-    // makeStringKey()
-    // ex) Vancouver_Granville_2334_3
     makeStringKey(){
         return `${this.city}_${this.streetName}_${this.streetNumber}_${this.floorLevel}`
     }

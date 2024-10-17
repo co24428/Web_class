@@ -18,6 +18,7 @@
     left: 50%;
     /* transform: translateX(-50%); */
     width: 70px; height: 70px;
+    cursor: pointer;
 }
 .nav-links{
     display: flex;
@@ -27,5 +28,8 @@
     text-decoration: none;
 }
 .nav-links a:hover{
-    font-weight: 600;
+    font-weight: 700;
+}
+.nav-links p a{
+    text-decoration: underline;
 }

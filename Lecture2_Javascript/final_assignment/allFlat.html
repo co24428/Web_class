@@ -7,17 +7,24 @@
     <title>allFlat</title>
     <link rel="stylesheet" href="styles/navbar.css">
     <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <script src="./scripts/sort_filter.js"></script>
     <script src="models.js"></script>
     <style>
         body{
             background-color: beige;
+        }
+        .hidden{
+            visibility: hidden;
+        }
+        .visable{
+            visibility: visible;
         }
         #main-content{
             height: 2000px;
             padding-top: 80px;
 
         }
-        .createNewFlatBtn{
+        #createNewFlatBtn{
             padding: 10px;
             margin: 10px;
         }
@@ -36,6 +43,7 @@
         .flatImage img {
             width: 100%;
             height: 100%;
+            border: 1px solid black;
         }
 
         .flatDetail{
@@ -137,7 +145,13 @@
             flatImg.classList.add('flatImage');
             flatEl.appendChild(flatImg);
             const img = document.createElement('img');
-            img.src = flat.imgLink;
+            if (flat.imgLink){
+                img.src = flat.imgLink;    
+            } else {
+                img.src = './img/logo.png';
+            }
+            
+            
             flatImg.appendChild(img);
 
             const flatDetail = document.createElement('div');
@@ -157,147 +171,14 @@
         }
     </script>
     <script>
-        // sort & filter
-        function sortByPrice(){
-            // 1. delete all flat divs
-            $('.flat').remove();
-
-            // 2. sort flats in all flats
-            if (isAscforPrice) { // if true, set descending order and turn out to false
-                showedFlats.sort((a, b) => b.rentalPricePerMonth-a.rentalPricePerMonth);
-                isAscforPrice = false;
-
-            } else { // if false, set ascending order and turn out to true
-                showedFlats.sort((a, b) => a.rentalPricePerMonth-b.rentalPricePerMonth);
-                isAscforPrice = true;
+        // admin functionality
+        function isAdminUser(user){
+            if(user.isAdmin){
+                return true;
+            } else {
+                return false;
             }
-            
-            // 3. set up flat divs
-            // sortedFlats.forEach(item => {
-            showedFlats.forEach(item => {
-                makeFlatDiv(item); 
-            });
         }
-        function sortByAreaSize(){
-            // 1. delete all flat divs
-            $('.flat').remove();
-
-            // 2. sort flats in all flats
-            if (isAscforAreaSize) { // if true, set descending order and turn out to false
-                showedFlats.sort((a, b) => b.squareMetreSize-a.squareMetreSize);
-                isAscforAreaSize = false;
-            } else { // if false, set ascending order and turn out to true
-                showedFlats.sort((a, b) => a.squareMetreSize-b.squareMetreSize);
-                isAscforAreaSize = true;
-            }
-            
-            // 3. set up flat divs
-            // sortedFlats.forEach(item => {
-            showedFlats.forEach(item => {
-                makeFlatDiv(item); 
-            });
-        }
-
-
-        function filterByCity(){
-            let filteredFlats = [];
-            // 0. set up cities list from allFlats
-            // cities, not used now
-
-            // 1. delete all flat divs
-            $('.flat').remove();
-
-            // 2. get target city and specific flat
-            const target = $('#filterByCity').val();
-            if (target != ''){
-                allFlats.forEach(flat => {
-                    if (flat.city.toLowerCase().includes(target.toLowerCase())){
-                        filteredFlats.push(flat);
-                    }
-                });
-            } else if (target == ''){
-                filteredFlats = allFlats;
-            }
-            showedFlats = filteredFlats;
-            
-            // 3. set up flat divs
-            filteredFlats.forEach(item => {
-                makeFlatDiv(item); 
-            });
-        }
-        // function FilterByPrice(min, max, onoff){
-        // function FilterByPrice(min, max){
-        function FilterByPrice(){
-            let filteredFlats = [];
-            const min = $('#minPrice').val();
-            const max = $('#maxPrice').val();
-            const checkMin = (min == '');
-            const checkMax = (max == '');
-
-            if (checkMax && checkMin){
-                filteredFlats = allFlats;
-            } else if (checkMax){ // only Min is inserted
-                allFlats.forEach(flat => {
-                    if (flat.rentalPricePerMonth >= Number.parseInt(min)){
-                        filteredFlats.push(flat);
-                    }
-                });
-            } else if (checkMin){ // only Max is inserted
-                allFlats.forEach(flat => {
-                    if (flat.rentalPricePerMonth <= Number.parseInt(max)){
-                        filteredFlats.push(flat);
-                    }
-                });
-            } else { // both are inserted
-                allFlats.forEach(flat => {
-                    if ((flat.rentalPricePerMonth >= Number.parseInt(min)) && (flat.rentalPricePerMonth <= Number.parseInt(max))){
-                        filteredFlats.push(flat);
-                    }
-                });
-            }
-            showedFlats = filteredFlats;
-            
-            $('.flat').remove();
-            filteredFlats.forEach(item => {
-                makeFlatDiv(item); 
-            });
-        }
-        function FilterByAreaSize(){
-            let filteredFlats = [];
-            const min = $('#minAreaSize').val();
-            const max = $('#maxAreaSize').val();
-            const checkMin = (min == '');
-            const checkMax = (max == '');
-
-            if (checkMax && checkMin){
-                filteredFlats = allFlats;
-            } else if (checkMax){ // only Min is inserted
-                allFlats.forEach(flat => {
-                    if (flat.squareMetreSize >= Number.parseInt(min)){
-                        filteredFlats.push(flat);
-                    }
-                });
-            } else if (checkMin){ // only Max is inserted
-                allFlats.forEach(flat => {
-                    if (flat.squareMetreSize <= Number.parseInt(max)){
-                        filteredFlats.push(flat);
-                    }
-                });
-            } else { // both are inserted
-                allFlats.forEach(flat => {
-                    if ((flat.squareMetreSize >= Number.parseInt(min)) && (flat.squareMetreSize <= Number.parseInt(max))){
-                        filteredFlats.push(flat);
-                    }
-                });
-            }
-            showedFlats = filteredFlats;
-            
-            $('.flat').remove();
-            filteredFlats.forEach(item => {
-                makeFlatDiv(item); 
-            });
-        }
-
     </script>
     <script>
         let allFlats;
@@ -313,6 +194,13 @@
                 if (storedUser) {
                     const user = JSON.parse(storedUser);
                     $('.nav-links p a').text(user.firstName);
+                    if (isAdminUser(user)){
+                        $('#createNewFlatBtn').addClass('visable');
+                        $('#createNewFlatBtn').removeClass('hidden');
+                    } else {
+                        $('#createNewFlatBtn').addClass('hidden');
+                        $('#createNewFlatBtn').removeClass('visable');
+                    }
                     
                 }
             } else {
@@ -343,11 +231,11 @@
                 // remove 'loggedInUser' in localStorage
                 localStorage.removeItem('loggedInUser');
             })
-        });
-    </script>
 
-    <script>
-        $(document).ready(function () {
+
+            $('#createNewFlatBtn').click(e =>{
+                window.location.href= 'newFlat.html';
+            });
         });
     </script>
 </head>
@@ -363,7 +251,7 @@
     </div>
 
     <div id="main-content">
-        <button id="" class="createNewFlatBtn">Create new flat</button>
+        <button id="createNewFlatBtn">Create new flat</button>
         <div class="allflats"></div>
     </div>
 
