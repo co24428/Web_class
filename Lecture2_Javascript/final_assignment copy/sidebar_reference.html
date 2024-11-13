@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right Side Sidebar with Hide/Show</title>
+    <style>
+        /* Main content styling */
+        .main-content {
+            padding: 20px;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            /* Initially hidden off-screen */
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Sidebar open state */
+        .sidebar.open {
+            right: 0;
+            /* Show sidebar */
+        }
+
+        /* Sidebar links */
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Toggle Button Styling */
+        .toggle-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            /* Keep the button on top */
+        }
+
+        .toggle-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#toggle-sidebar').click(function () {
+                $('#sidebar').toggleClass('open');
+
+                // Change button text based on sidebar state
+                if ($('#sidebar').hasClass('open')) {
+                    $('#toggle-sidebar').text('Hide');
+                } else {
+                    $('#toggle-sidebar').text('Show');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Main Content -->
+    <div style="height:2000px" class="main-content">
+        <h1>Homepage Content</h1>
+        <p>This is the main content of the homepage.</p>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <h2>Sidebar Content</h2>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </div>
+
+    <!-- Toggle Button -->
+    <button id="toggle-sidebar" class="toggle-button">Show</button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

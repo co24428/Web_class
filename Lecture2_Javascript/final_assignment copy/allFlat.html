@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>allFlat</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <script src="./scripts/sort_filter.js"></script>
+    <script src="models.js"></script>
+    <style>
+        body{
+            background-color: beige;
+        }
+        .hidden{
+            visibility: hidden;
+        }
+        .visable{
+            visibility: visible;
+        }
+        #main-content{
+            padding-top: 80px;
+        }
+        #createNewFlatBtn{
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .flat {
+            position: relative; /* for layout */
+            display: flex;
+            margin: 30px 30px;
+        }
+
+        .flatImage {
+            width: 30%;
+        }
+
+        .flatImage img {
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+        }
+
+        .flatDetail{
+            margin: 5px;
+        }
+        .favouriteBtn{
+            position: absolute; /* for layout */
+            top: 15px;
+            right: 250px;
+            padding: 10px 20px;
+            background-color: yellow;
+            border: 1px solid yellowgreen;
+        }
+        .favouriteBtn:hover {
+            background-color: red;
+        }
+        .favouriteFlat{
+            border: 2px solid blueviolet;
+        }
+    </style>
+    <style>
+        /* Main content styling */
+        .main-content {
+            padding: 20px;
+        }
+
+        /* Sidebar styling */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            /* Initially hidden off-screen */
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Sidebar open state */
+        #sidebar.open {
+            right: 0;
+            /* Show sidebar */
+        }
+
+        /* Sidebar links */
+        #sidebar ul {
+            list-style-type: none;
+            padding-top: 50px;
+        }
+
+        #sidebar ul li {
+            margin: 15px 0;
+        }
+
+        #sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        #sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Toggle Button Styling */
+        #toggleBtn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 10px 20px;
+            background-color: rgb(194, 194, 175);
+            border: none;
+            cursor: pointer;
+            z-index: 1000; /* Keep the button on top */
+        }
+
+        #toggleBtn:hover {
+            background-color: rgb(181, 181, 145);
+        }
+    </style>
+    <script>
+        // show flat items
+
+        // const flatComponents = ['city', 'streetName', 'streetNumber', 'floorLevel', 'squareMetreSize', 'hasAirConditioning', 
+        //         'rentalPricePerMonth', 'leaseDurationInMonth', 'petsAllowed', 'imgLink', 'DateAvailable'];
+        const flatComponents = ['city', 'streetName', 'streetNumber', 'floorLevel', 'squareMetreSize', 'hasAirConditioning',
+            'rentalPricePerMonth', 'leaseDurationInMonth', 'petsAllowed', 'DateAvailable'];
+        function getAllFlat() {
+            const items = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                try{
+                    const item = JSON.parse(localStorage.getItem(localStorage.key(i)));
+                    // console.log(item instanceof Flat); // cannot get original Object type.. :(
+                    if (item.city) {
+                        makeFlatDiv(item);
+                        items.push(item);
+                    }
+                } catch(e){}
+
+            }
+            return items;
+        }
+        function makeFlatDiv(flat) {
+            const allFlatsDiv = document.querySelector('.allflats');
+
+            const flatEl = document.createElement('div');
+            flatEl.classList.add('flat');
+
+            const flatImg = document.createElement('div');
+            flatImg.classList.add('flatImage');
+            flatEl.appendChild(flatImg);
+            const img = document.createElement('img');
+            if (flat.imgLink){
+                img.src = flat.imgLink;    
+            } else {
+                img.src = './img/logo.png';
+            }
+            
+            
+            flatImg.appendChild(img);
+
+            const flatDetail = document.createElement('div');
+            flatDetail.classList.add('flatDetail');
+            flatEl.appendChild(flatDetail);
+            for (let i = 0; i < flatComponents.length; i++) {
+                makeTextEl(flatDetail, flatComponents[i], flat[flatComponents[i]]);
+            }
+
+            const favouriteBtn = document.createElement('button');
+            favouriteBtn.classList.add('favouriteBtn');
+            if (checkFavourite(flat)){
+                favouriteBtn.classList.add('favouriteFlat');
+            }
+            favouriteBtn.innerText = 'favourite';
+            flatEl.appendChild(favouriteBtn);
+
+            allFlatsDiv.appendChild(flatEl);
+
+        }
+        function makeTextEl(target, key, value) {
+            const textEl = document.createElement('p');
+            textEl.innerText = `${key}: ${value}`;
+            target.appendChild(textEl);
+        }
+        function checkFavourite(flat){
+            // get FavouriteList
+            const user = JSON.parse(localStorage.getItem(loggedInUser));
+            const favouriteFlats = user.favouriteFlats;
+
+            const flatId = `${flat.city}_${flat.streetName}_${flat.streetNumber}_${flat.floorLevel}`;
+
+            if (favouriteFlats.includes(flatId)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+    <script>
+        // admin functionality
+        function isAdminUser(user){
+            if(user.isAdmin){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+    <script>
+        let allFlats = [];
+        let showedFlats = [];
+        let cities = [];
+        let loggedInUser;
+        let isAscforPrice = false;
+        let isAscforAreaSize = false;
+        let favouriteFilterOnOff = false;
+        $(document).ready(() => {
+            loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                const storedUser = localStorage.getItem(loggedInUser);
+                if (storedUser) {
+                    const user = JSON.parse(storedUser);
+                    $('.nav-links p a').text(user.firstName);
+                    if (isAdminUser(user)){
+                        $('#createNewFlatBtn').addClass('visable');
+                        $('#createNewFlatBtn').removeClass('hidden');
+                    } else {
+                        $('#createNewFlatBtn').addClass('hidden');
+                        $('#createNewFlatBtn').removeClass('visable');
+                    }
+                }
+            } else {
+                alert('Please log in first.')
+                window.location.href = 'login.html';
+            }
+            $('#logo').click(function() {
+                window.location.href = 'allFlat.html';
+            });
+            
+
+            allFlats = getAllFlat();
+            showedFlats = allFlats;
+            allFlats.forEach(flat => cities.push(flat.city));
+
+            // scripts for toggle logic
+            $('#toggleBtn').click(function() {
+                $('#sidebar').toggleClass('open');
+
+                // Change button text based on sidebar state
+                if ($('#sidebar').hasClass('open')) {
+                    $('#toggleBtn').text('Hide');
+                } else {
+                    $('#toggleBtn').text('Filter');
+                }
+            });
+            $('#logout').click(function() {
+                // remove 'loggedInUser' in localStorage
+                localStorage.removeItem('loggedInUser');
+            })
+
+            $('#createNewFlatBtn').click(e =>{
+                window.location.href= 'newFlat.html';
+            });
+
+            $('.favouriteBtn').click(e =>{
+                // get target flat object
+                const city = (e.target.closest('.flat').getElementsByTagName('p')[0].innerText).split(' ')[1];
+                const streetName = (e.target.closest('.flat').getElementsByTagName('p')[1].innerText).split(' ')[1];
+                const streetNumber = (e.target.closest('.flat').getElementsByTagName('p')[2].innerText).split(' ')[1];
+                const floorLevel = (e.target.closest('.flat').getElementsByTagName('p')[3].innerText).split(' ')[1];
+                const flatId = `${city}_${streetName}_${streetNumber}_${floorLevel}`;
+                const flatObj = JSON.parse(localStorage.getItem(flatId));
+
+                // get FavouriteList
+                const user = JSON.parse(localStorage.getItem(loggedInUser));
+                let favouriteFlats = user.favouriteFlats;
+
+                // check target is in favouriteList
+                if (!favouriteFlats.includes(flatId)){
+                    // process when it's not included in favourite list
+                    $(e.target).addClass('favouriteFlat');
+                    favouriteFlats.push(flatId);
+                } else {
+                    // process when it's included in favourite list
+                    $(e.target).removeClass('favouriteFlat');
+                    favouriteFlats = favouriteFlats.filter(item => item !== flatId);
+                }
+                user.favouriteFlats = favouriteFlats;
+                localStorage.setItem(user.email, JSON.stringify(user));
+            });
+            $('#favouriteFilter').click(FilterByFavourite);
+        });
+
+        function FilterByFavourite(){
+            const user = JSON.parse(localStorage.getItem(loggedInUser));
+            let favouriteFlats = user.favouriteFlats;
+            console.log('asdsadasd');
+
+            $('.flat').remove();
+            if (!favouriteFilterOnOff) {
+                // process when turn on
+                allFlats.forEach(flat => {
+                    if (checkFavourite(flat)){
+                        makeFlatDiv(flat); 
+                    }
+                });
+                favouriteFilterOnOff = true;
+            } else {
+                // process when turn off
+                allFlats.forEach(flat => {
+                    makeFlatDiv(flat); 
+                });
+                favouriteFilterOnOff = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+    <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="profile.html">[first name]</a></p>
+            <a id="logout" href="login.html">Logout</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <button id="createNewFlatBtn">Create new flat</button>
+        <div class="allflats"></div>
+    </div>
+
+    <!-- Sidebar for filter -->
+
+    <!-- filter: city, price range, area size range -->
+    <!-- sort: city, price, area size -->
+    <div id="sidebar">
+        <ul>
+            <li><a id="favouriteFilter" href="#">favourite</a></li>
+            <li><h2>Sort</h2></li>
+            <li>
+                <p style="font-size: 20px; ">Price
+                    <button style="margin-left: 4px;" onclick="sortByPrice()">apply</button>
+                </p>
+            </li>
+            <li>
+                <p style="font-size: 20px;">Area Size
+                    <button style="margin-left: 4px;" onclick="sortByAreaSize()">apply</button>
+                </p>
+            </li>
+
+            <li><h2>Filter</h2></li>
+            <li>
+                <p style="font-size: 20px; ">City
+                    <input type="text" id="filterByCity" style="width: 70px;" placeholder="city">
+                    <button style="margin-left: 4px;" onclick="filterByCity()">apply</button>
+                </p>
+            </li>
+            <li>
+                <p style="font-size: 20px;">Price</p>
+                <p><input type="number" id="minPrice" placeholder="min"> ~
+                    <input type="number" id="maxPrice" placeholder="max">
+                    <button onclick="FilterByPrice()">apply</button>
+                </p>
+            </li>
+            <li>
+                <p style="font-size: 20px;">Area Size</p>
+                <p><input type="number" id="minAreaSize" placeholder="min"> ~
+                    <input type="number" id="maxAreaSize" placeholder="max">
+                    <button onclick="FilterByAreaSize()">apply</button>
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Toggle Button -->
+
+    <button id="toggleBtn">Filter</button>
+</body>
+
+</html>

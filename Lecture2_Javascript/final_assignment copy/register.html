@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        body{
+            background-color: beige;
+        }
+        .nav-links{
+            visibility: hidden;
+        }
+        #main-content{
+            padding-top: 80px;
+            margin-left: 30px;
+
+            display: flex;
+            flex-direction: column;
+        }
+        #main-content form{
+            margin: 20px 0px;
+        }
+        #registerForm{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        #registerForm input{
+            height: 40px;
+            width: 200px;
+        }
+        #registerBtn{
+            height: 30px;
+            width: 150px;
+            color: black;
+            cursor: pointer;
+        }
+    </style>
+    <script src="models.js"></script>
+    <script>
+        function register(event) {
+            event.preventDefault(); // Prevent form submission and refres
+
+            const email = $('#email').val();
+            const pwd = $('#pwd').val();
+            const verifyPwd = $('#verifyPwd').val();
+            const firstName = $('#firstName').val();
+            const lastName = $('#lastName').val();
+            const birthday = $('#birthday').val();
+            if(!validateInformation(email, pwd, firstName, lastName, birthday)){
+                return 0;
+            }
+
+            const newUser = new User(email, 
+                        pwd, 
+                        firstName, 
+                        lastName, 
+                        new Date(birthday));
+            localStorage.setItem(email, JSON.stringify(newUser));
+            window.location.href = "login.html";
+            alert('Register successed!');
+        }
+        function validateInformation(email, pwd, firstName, lastName, birthday){
+            const validator = new Validator();
+
+            if (!validator.validateEmail(email)){
+                alert('Check your email.')
+                return false;
+            }
+            if (!validator.checkLength(pwd,6)){
+                alert('Password must be at least 6 characters long.')
+                return false;
+            }
+            if (!validator.checkPassword(pwd)){
+                alert('Password must contain Letters, Numbers, and a character thatis neither a letter nor a number.')
+                return false;
+            }
+            if (!validator.checkLength(firstName,2)){
+                alert('First name must be at least 2 characters long.')
+                return false;
+            }
+            if (!validator.checkLength(lastName,2)){
+                alert('Last name must be at least 2 characters long.')
+                return false;
+            }
+            if (!validator.checkAge(new Date(birthday),18,120)){
+                alert('Age must be in the range of 18 to 120.')
+                return false;
+            }
+            // validator.areNotEmpty(email, pwd, verifyPwd, firstName, lastName, birthday)
+            if (!validator.areNotEmpty(email, pwd, firstName, lastName, birthday)){
+                alert('Write down all of forms.')
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <script>
+        $(document).ready(() =>{
+
+            $('#registerBtn').click(register);
+        });
+    </script>
+</head>
+<body>
+
+    <!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+    <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="#">[first name]</a></p>
+            <a href="login.html">Logout</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <h1>Register</h1>
+        <form method="post">
+            <div id="registerForm">
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Email" name="email" id="email" required>
+                <!-- <button>verify</button> -->
+
+                <label for="pwd"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="pwd" id="pwd" required>
+                
+                <!-- <label for="verifyPwd"><b>Verify password</b></label>
+                <input type="password" placeholder="Verify Password" name="verifyPwd" id="verifyPwd" required> -->
+                
+                <label for="firstName"><b>First name</b></label>
+                <input type="text" placeholder="First name" name="firstName" id="firstName" required>
+                
+                <label for="lastName"><b>Last name</b></label>
+                <input type="text" placeholder="Last name" name="lastName" id="lastName" required>
+                
+                <label for="birthday"><b>Birthday</b></label>
+                <input type="date" placeholder="Birthday" name="birthday" id="birthday" required>
+                
+                <button type="submit" id="registerBtn">Register</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

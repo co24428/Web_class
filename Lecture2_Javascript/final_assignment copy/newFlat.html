@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <style>
+        body{
+            background-color: beige;
+        }
+        .nav-links{
+            visibility: hidden;
+        }
+        #main-content{
+            padding-top: 80px;
+            margin-left: 30px;
+
+            display: flex;
+            flex-direction: column;
+        }
+        #main-content form{
+            margin: 20px 0px;
+        }
+        #createForm{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        #createForm input{
+            height: 40px;
+            width: 200px;
+        }
+        #createBtn{
+            height: 30px;
+            width: 150px;
+            color: black;
+            cursor: pointer;
+        }
+    </style>
+    <script src="models.js"></script>
+    <script>
+        function create(event) {
+            event.preventDefault(); // Prevent form submission and refres
+            const city = $('#city').val();
+            const streetName = $('#streetName').val();
+            const streetNumber = $('#streetNumber').val();
+            const floorLevel = $('#floorLevel').val();
+            const squareMetreSize = $('#squareMetreSize').val();
+            const rentalPricePerMonth = $('#rentalPricePerMonth').val();
+            const hasAirConditioning = $('#hasAirConditioning').val();
+            const leaseDurationInMonth = $('#leaseDurationInMonth').val();
+            const petsAllowed = $('#petsAllowed').val();
+            const imgLink = $('#imgLink').val();
+            const DateAvailable = $('#DateAvailable').val();
+
+            const newFlat = new Flat(city, streetName, streetNumber, floorLevel, squareMetreSize, hasAirConditioning, 
+                rentalPricePerMonth, leaseDurationInMonth, petsAllowed, imgLink, new Date(DateAvailable));
+            localStorage.setItem(newFlat.makeStringKey(), JSON.stringify(newFlat));
+
+            window.location.href = "allFlat.html";
+            alert('Create successed!');
+        }
+    </script>
+    <script>
+        $(document).ready(() =>{
+            $('#createBtn').click(create);
+
+            $('#logo').click(function() {
+                window.location.href = 'allFlat.html';
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+    <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="#">[first name]</a></p>
+            <a href="login.html">Logout</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <h1>New Flat</h1>
+        <form method="post">
+            <div id="createForm">
+                <label for="city"><b>City</b></label>
+                <input type="text" name="city" id="city" required>
+                
+                <label for="streetName"><b>StreetName</b></label>
+                <input type="text" name="streetName" id="streetName" required>
+                
+                <label for="streetNumber"><b>StreetNumber</b></label>
+                <input type="text" name="streetNumber" id="streetNumber" required>
+
+                <label for="floorLevel"><b>FloorLevel</b></label>
+                <input type="number" name="floorLevel" id="floorLevel" required>
+                
+                <label for="squareMetreSize"><b>SquareMetreSize</b></label>
+                <input type="number" name="squareMetreSize" id="squareMetreSize" required>
+
+                <label for="rentalPricePerMonth"><b>RentalPricePerMonth</b></label>
+                <input type="number" name="rentalPricePerMonth" id="rentalPricePerMonth" required>
+
+                <label for="hasAirConditioning"><b>HasAirConditioning</b></label>
+                <input type="text" name="hasAirConditioning" id="hasAirConditioning">
+
+                <label for="leaseDurationInMonth"><b>LeaseDurationInMonth</b></label>
+                <input type="number" name="leaseDurationInMonth" id="leaseDurationInMonth">
+
+                <label for="petsAllowed"><b>PetsAllowed</b></label>
+                <input type="text" name="petsAllowed" id="petsAllowed">
+
+                <label for="imgLink"><b>ImgLink</b></label>
+                <input type="text" name="imgLink" id="imgLink">
+
+                <label for="DateAvailable"><b>DateAvailable</b></label>
+                <input type="Date" name="DateAvailable" id="DateAvailable">
+
+                <button type="submit" id="createBtn">Create</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
