@@ -12,5 +12,10 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'directive-app';
+  number: number = 11;
+  animal: string = 'fox';
+
+  getCSSClasses(flag: string) {
+    return flag == 'lightMode' ? 'one' : 'two'
+  }
 }

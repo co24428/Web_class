@@ -1,3 +1,17 @@
 .blue {
     color: blue;
 }
+.green{
+    color: green;
+}
+.bold{
+    font-weight: bold;
+}
+.one{
+    color: darkblue;
+    background-color: white;
+}
+.two{
+    color: white;
+    background-color: darkblue;
+}

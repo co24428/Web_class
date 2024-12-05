@@ -1,5 +1,22 @@
-<p [ngClass]="'blue'">
+<div [ngClass]="'blue'">
     Angular directives are COOL!
-</p>
+</div>
 
-<p>hi</p>
+<div [ngClass]="['green', 'bold']">
+    This has two classes using ngClass!
+</div>
+
+<div [ngClass]="number > 5 ? 'bold': ''">
+    put class using condition
+</div>
+
+<div [ngClass]="getCSSClasses('lightMode')">
+    Using NgClass with COmponenet Method
+</div>
+<div [ngClass]="getCSSClasses('lightModes')">
+    Using NgClass with COmponenet Method
+</div>
+
+<div [ngStyle]="{'background-color':animal === 'fox' ? 'orange' : 'grey'}">
+    The animal is {{animal}}
+</div>
