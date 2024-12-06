@@ -20,3 +20,34 @@
 <div [ngStyle]="{'background-color':animal === 'fox' ? 'orange' : 'grey'}">
     The animal is {{animal}}
 </div>
+
+<hr>
+
+<div *ngFor="let spend of spends; let i = index">
+    {{i}}. {{spend.price}}, {{spend.place}}
+</div>
+
+<ul *ngFor="let spend of spends; let i = index">
+    <li *ngIf="spend.price < 15">
+        {{i}}. ${{spend.price}}, {{spend.place}}
+    </li>
+</ul>
+
+<div>
+    <button (click)="toggleImage()">Toggle Image</button>
+    <div *ngIf="isActive">
+        <img src="../assets/HMart.png">
+    </div>
+</div>
+
+<ul *ngFor="let spend of spends" [ngSwitch]="spend.place">
+    <li *ngSwitchCase="'HMart'" style="color: orange;">
+        {{spend.price}}, {{spend.place}}
+    </li>
+    <li *ngSwitchCase="'Loblaws'" style="color: purple;">
+        {{spend.price}}, {{spend.place}}
+    </li>
+    <li *ngSwitchCase="'Rexall'" style="color: skyblue;">
+        {{spend.price}}, {{spend.place}}
+    </li>
+</ul>
