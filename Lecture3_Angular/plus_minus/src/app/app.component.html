@@ -1,21 +1,13 @@
 <div [ngClass]="'content'">
     <h2 [ngClass]="'title'">{{title}}</h2>
-    <!-- <h2 [ngClass]="count >= 0 ? 'green' : 'red'">{{count}}</h2> -->
-    <h2 [ngStyle]="{'color': count >= 0 ? 'green' : 'red' }">{{count}}</h2>
+    <app-counter [counter]="counter"></app-counter>
+    <!-- <h2 [ngStyle]="{'color': count >= 0 ? 'green' : 'red' }">{{count}}</h2> -->
 
     <div>
-        <button [ngClass]="'plus'" (click)="changeCount(1)">+</button>
-        <button [ngClass]="'minus'" (click)="changeCount(-1)">-</button>
+        <app-plus-button [counter]="counter" (counterEvent)="changeCounter($event)"></app-plus-button>
+        <app-minus-button [counter]="counter" (counterEvent)="changeCounter($event)"></app-minus-button>
+        <button (click)="reset()">reset</button>
+        <!-- <button [ngClass]="'plus'" (click)="changeCount(1)">+</button> -->
+        <!-- <button [ngClass]="'minus'" (click)="changeCount(-1)">-</button> -->
     </div>
 </div>
-
-<!--
-(in app.component.html)
-h2 tag - the title
-h2 tag - the counter. If the number is >= than 0 the color is green, ekse the color is red.
-Buttons plus and minus
-
-(in app.component.css)
-create classes for styling
-
--->
