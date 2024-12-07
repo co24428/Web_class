@@ -1,0 +1,18 @@
+<div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label>First Name:</label><br>
+    <input id="firstName" type="text" formControlName="firstName"><br>
+
+    <label>Last Name:</label><br>
+    <input id="lastName" type="text" formControlName="lastName"><br>
+
+    <label>County:</label><br>
+    <input id="country" type="text" formControlName="country"><br>
+
+    <label>Note:</label><br>
+    <input id="note" type="text" formControlName="note"><br>
+    
+    <button type="submit" [disabled]="!registerForm.valid">submit</button>
+  </form>
+  <button (click)="reset()">reset</button>
+</div>
