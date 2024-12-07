@@ -1,0 +1,6 @@
+<h2>I am {{name}}</h2>
+
+<label>Add a person: <input #newPerson ></label>
+<button type="button" (click)="addNewPerson(newPerson.value)">
+    Add to the list
+</button>
