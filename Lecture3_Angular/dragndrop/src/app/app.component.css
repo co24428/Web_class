@@ -1,5 +1,6 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+.cdk-drag-animating {
+  transition: transform 250ms;
+}
+.cdk-drag-placeholder {
+  opacity: 0;
+}
