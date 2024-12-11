@@ -1,0 +1,26 @@
+ul.navigation-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  ul.navigation-items li {
+    margin-right: 15px; 
+  }
+  
+  ul.navigation-items li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  ul.navigation-items li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+  }
+  
