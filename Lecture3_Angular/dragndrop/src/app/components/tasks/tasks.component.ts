@@ -14,10 +14,9 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 export class TasksComponent implements OnInit{
   constructor() {}
   ngOnInit(): void {}
-  @Input() todo: Task[] = [];
-  @Input() inProgress: Task[] = [];
-  @Input() done: Task[] = [];
-  // @Output() drop = new EventEmitter<Task>();
+  @Input() todo: Task[] | undefined;
+  @Input() inProgress: Task[] | undefined;
+  @Input() done: Task[] | undefined;
 
   showMessage = false;
   submitted = false;
@@ -36,6 +35,7 @@ export class TasksComponent implements OnInit{
   getDesctiption() { return this.addTaskForm.get('description')!;}
   onSubmit(): void {
     this.submitted = false;
+    console.log(this.todo);
     if (this.addTaskForm.invalid) return;
   }
 }
