@@ -18,40 +18,5 @@ import { SideNavListComponent } from './components/side-nav-list/side-nav-list.c
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  todo: Task[] = [
-    {
-      title: 'Buy milk',
-      description: 'Go to the store and buy milk'
-    },
-    {
-      title: 'Drawing on canvas',
-      description: 'Buy 3 canvas and pens!'
-    }
-  ];
-  inProgress: Task[] = [];
-  done: Task[] = [];
 
-  drop(event: CdkDragDrop<Task[]>): void {
-    if (event.previousContainer === event.container) return;
-    if (!event.container.data || !event.previousContainer.data) return;
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
-  }
-
-  deleteIt(list: string, task: Task) {
-    if(list === 'todo') {
-      let index = this.todo.indexOf(task);
-      this.todo.splice(index, 1);
-    } else if (list === 'inProgress') {
-      let index = this.inProgress.indexOf(task);
-      this.inProgress.splice(index, 1);
-    } else if (list === 'done') {
-      let index = this.done.indexOf(task);
-      this.done.splice(index, 1);
-    }
-  }
 }
