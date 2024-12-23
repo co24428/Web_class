@@ -1,0 +1,18 @@
+<div>
+    <h1>Firebase 연동</h1>
+    
+    <!-- 로그인 -->
+    <h2>Login</h2>
+    <input [(ngModel)]="email" placeholder="Email" />
+    <input [(ngModel)]="password" type="password" placeholder="Password" />
+    <button (click)="login()">Login</button>
+    <button (click)="signup()">Signup</button>
+  
+    <!-- Firestore 데이터 -->
+    <h2>Firestore Data</h2>
+    <button (click)="loadData()">Load Data</button>
+    <button (click)="addData()">Add Data</button>
+    <ul>
+      <li *ngFor="let item of data">{{ item | json }}</li>
+    </ul>
+  </div>
