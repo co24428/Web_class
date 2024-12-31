@@ -1,0 +1,13 @@
+<h2>Post a New Flat</h2>
+<form (ngSubmit)="onSubmit()">
+    <label>City:</label>
+    <input type="text" [(ngModel)]="flat.city" name="city" required>
+    <br />
+    <label>Price:</label>
+    <input type="number" [(ngModel)]="flat.rentPrice" name="rentprice" required>
+    <br />
+    <label>Area Size:</label>
+    <input type="number" [(ngModel)]="flat.areaSize" name="areasize" required>
+    <br />
+    <button type="submit">Save</button>
+</form>

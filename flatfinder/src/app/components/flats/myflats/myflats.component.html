@@ -1,0 +1,23 @@
+<h2>My Flats</h2>
+<button (click)="addNewFlat()">Add New Flat</button>
+<table>
+    <thead>
+        <tr>
+            <th>City</th>
+            <th>Rent Price</th>
+            <th>Area Size</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let flat of myFlats">
+            <td>{{ flat.city }}</td>
+            <td>{{ flat.rentPrice }}</td>
+            <td>{{ flat.areaSize }} sqft</td>
+            <td>
+                <button (click)="editFlat(flat.id)">Edit</button>
+                <button (click)="deleteFlat(flat.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

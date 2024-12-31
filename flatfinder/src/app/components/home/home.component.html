@@ -1,2 +1,36 @@
-<h2>Welcome to FlatFinder</h2>
-<p>Browse available flats and find your perfect match!</p>
+<h2>Available Flats</h2>
+<div>
+    <label>Filter by City:</label>
+    <input type="text" [(ngModel)]="filter.city" (input)="applyFilters()" />
+    <label>Max Rent Price:</label>
+    <input type="number" [(ngModel)]="filter.maxPrice" (input)="applyFilters()" />
+    <button (click)="clearFilters()">Clear Filters</button>
+</div>
+<div>
+    <label>
+        <input type="checkbox" [(ngModel)]="filter.showFavorites" (change)="applyFilters()" />
+        Show Favorites Only
+    </label>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>City</th>
+            <th>Rent Price</th>
+            <th>Area Size</th>
+            <th>Favorite</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let flat of filteredFlats">
+            <td>{{ flat.city }}</td>
+            <td>{{ flat.rentPrice }}</td>
+            <td>{{ flat.areaSize }} sqft</td>
+            <td>
+                <button (click)="toggleFavorite(flat)">
+                    {{ flat.isFavorite ? 'Unmark' : 'Mark' }}
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
