@@ -1,8 +1,62 @@
+<!-- 'Hello [fname]', Logout, ... Logo image(refresh) ... , open side bar -->
+<!-- <div class="navbar">
+        <img id="logo" src="./img/logo.png" alt="Logo">
+        <div class="nav-links">
+            <p>Hello, <a href="#">[first name]</a></p>
+            <a href="login.html">Logout</a>
+        </div>
+    </div> -->
+
+<div id="main-content">
+    <h1>Login</h1>
+    <form method="post">
+        <div id="loginForm">
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Email" name="email" id="email" required>
+
+            <label for="pwd"><b>Password</b></label>
+            <input type="password" placeholder="Password" name="pwd" id="pwd" required>
+
+            <button type="submit" id="loginBtn">Login</button>
+        </div>
+    </form>
+    <p>If you haven't registered?</p>
+    <button id="registerBtn"><a href="register.html">Create an accout</a></button>
+</div>
+
+<div>--------------</div>
+
+
+<!-- <div class="example-container"> -->
+<div id="main-content">
+    <div id="loginForm">
+        <label for="email"><b>Email</b></label>
+        <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input matInput type="email" placeholder="pat@example.com" [formControl]="email"
+                (blur)="updateErrorMessage()" required />
+            <mat-error *ngIf="email.invalid">{{ errorMessage() }}</mat-error>
+        </mat-form-field>
+
+        <label for="password"><b>Password</b></label>
+        <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput type="password" placeholder="******" [formControl]="password" required />
+            <mat-error *ngIf="password.invalid">Password is required and must be strong.</mat-error>
+        </mat-form-field>
+    </div>
+    <p>If you haven't registered?</p>
+    <button id="registerBtn"><a href="register.html">Create an accout</a></button>
+</div>
+
+<div>--------------</div>
 <div>
     <h2>Login</h2>
     <form (ngSubmit)="onLogin()">
-        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
-        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
-        <button type="submit">Login</button>
+        <div id="loginForm">
+            <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+            <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+            <button type="submit">Login</button>
+        </div>
     </form>
 </div>
