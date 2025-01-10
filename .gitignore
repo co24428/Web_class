@@ -5,3 +5,6 @@ Lecture2_Javascript/Week2/.DS_Store
 angular_test
 angular-basic-lesson
 Lecture3_Angular/node_modules
+.DS_Store
+
+Lecture3_Angular/ng-auth/src/app/app.config.ts
