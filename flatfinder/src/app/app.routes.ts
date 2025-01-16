@@ -6,6 +6,7 @@ import { MyflatsComponent } from './components/flats/myflats/myflats.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
+    // { path: '', component: LoginComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'flats/newflat', component: NewflatComponent},
