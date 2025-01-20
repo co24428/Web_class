@@ -7,4 +7,4 @@ angular-basic-lesson
 Lecture3_Angular/node_modules
 .DS_Store
 
-Lecture3_Angular/ng-auth/src/app/app.config.ts
+./Lecture3_Angular/ng-auth/src/app/app.config.ts
