@@ -1,5 +1,4 @@
 <nav class="navbar">
-    <!-- <img id="logo" src="./img/logo.png" alt="Logo"> -->
     <img id="logo" src="../../../assets/logo.png" alt="Logo">
 
     <!-- <div>
@@ -7,10 +6,16 @@
         <a id="logout" href="login.html">Logout</a>
     </div> -->
     <div class="nav-links">
-        <a routerLink="/home">Home</a> |
-        <a routerLink="/login">Login</a> |
-        <a routerLink="/flats/newflat">Post a Flat</a> |
-        <a routerLink="/flats/myflats">My Flats</a>
+        <div *ngIf="!isLoggedIn">
+            <a routerLink="/login">Login</a>  to FlatFinder!
+        </div>
+        <div *ngIf="isLoggedIn">
+            <a (click)="logout()">Logout</a> |
+            <a routerLink="/home">Home</a> |
+            <a routerLink="/flats/newflat">Post a Flat</a> |
+            <a routerLink="/flats/myflats">Profile / My Flat</a>
+        </div>
+        
     </div>
 
 </nav>

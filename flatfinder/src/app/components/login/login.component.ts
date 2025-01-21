@@ -1,46 +1,47 @@
-import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {merge} from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { merge } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MaterialModule, 
-    FormsModule, 
+  imports: [MaterialModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
-  
+
 })
 export class LoginComponent {
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(6)]); // Password must be at least 6 characters
+  email = new FormControl<string>('', [Validators.required, Validators.email]);
+  password = new FormControl<string>('', [Validators.required]);
 
-  errorMessage = signal('');
+  constructor(private authService: AuthService, private router: Router) { }
 
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
-  }
+  async onLogin() {
 
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
-    } else if (this.email.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
-    } else {
-      this.errorMessage.set('');
+    const emailValue = this.email.value;
+    const passwordValue = this.password.value;
+
+    // Check for null or empty values
+    if (!emailValue || !passwordValue) {
+      alert('Please fill in both email and password.');
+      return;
     }
-  }
-
-  onLogin() {
-    console.log('Login attempt:', this.email, this.password)
+    const success = await this.authService.login(emailValue, passwordValue);
+    if (success) {
+      this.router.navigate(['/home']);
+    } else {
+      alert('Login failed: check your email or password');
+    }
+    // console.log('Login attempt:', this.email, this.password)
   }
 
 

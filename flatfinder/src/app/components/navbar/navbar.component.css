@@ -20,16 +20,16 @@
     width: 70px; height: 70px;
     cursor: pointer;
 }
-.nav-links{
+.nav-links div{
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
-.nav-links a{
+.nav-links div a{
     text-decoration: none;
 }
 .nav-links a:hover{
     font-weight: 700;
 }
-.nav-links p a{
+.nav-links div a{
     text-decoration: underline;
 }
