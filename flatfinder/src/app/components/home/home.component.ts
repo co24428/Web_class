@@ -24,8 +24,6 @@ export class HomeComponent {
   constructor(private dataService: DataService, private userService: UserService) {
     this.flats = this.dataService.getFlats();
     this.filteredFlats = [...this.flats];
-    console.log(this.flats)
-    console.log(this.filteredFlats)
 
   }
 

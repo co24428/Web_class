@@ -4,7 +4,7 @@ export class User {
     password: string;
     firstName: string;
     lastName: string;
-    birthday: Date;
+    birthDate: Date;
     isAdmin: boolean;
     favouriteFlats: string[];
 
@@ -14,7 +14,7 @@ export class User {
         password: string,
         firstName: string,
         lastName: string,
-        birthday: Date,
+        birthDate: Date,
         isAdmin: boolean,
         favouriteFlats: string[] = []
     ) {
@@ -23,7 +23,7 @@ export class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
+        this.birthDate = birthDate;
         this.isAdmin = isAdmin;
         this.favouriteFlats = favouriteFlats;
     }

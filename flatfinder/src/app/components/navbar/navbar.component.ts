@@ -19,9 +19,6 @@ export class NavbarComponent {
     return this.authService.isLoggedIn();
   }
   get isAdmin(): boolean {
-
-    console.log(this.authService.isAdmin())
-    
     return this.authService.isAdmin();
   }
   logout() {

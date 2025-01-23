@@ -67,7 +67,6 @@ export class RegisterComponent {
       alert('Registration successful!');
       this.router.navigate(['/home']);
     } catch (error) {
-      console.log(error)
       alert('Registration failed. Please try again.');
     }
   }

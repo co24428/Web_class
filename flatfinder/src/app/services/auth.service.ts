@@ -24,16 +24,17 @@ export class AuthService {
       return false;
     }
   }
-  async fetchAllUsers(): Promise<void> {
+  async fetchAllUsers(): Promise<any> {
     try {
       const usersCollectionRef = collection(this.firestore, 'users'); // Reference to the 'users' collection
       const querySnapshot = await getDocs(usersCollectionRef);
   
       // Loop through all documents in the collection
-      querySnapshot.forEach((doc) => {
-        console.log(`Document ID: ${doc.id}`);
-        console.log('Document Data:', doc.data());
-      });
+      // querySnapshot.forEach((doc) => {
+      //   console.log(`Document ID: ${doc.id}`);
+      //   console.log('Document Data:', doc.data());
+      // });
+      return querySnapshot;
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -42,52 +43,20 @@ export class AuthService {
     const userUid = userCredential.user.uid;
     const usersCollectionRef = collection(this.firestore, 'users');
     const querySnapshot = await getDocs(usersCollectionRef);
-    // querySnapshot.forEach((doc) => {
-    //   console.log(`Document ID: ${doc.id}`);
-    //   console.log('Document Data:', doc.data());
-    //   console.log('UID:', doc.data()['uid']);
-    // });
     const q = query(usersCollectionRef, where('uid', '==', userCredential.user.uid));
     const querySnapshot2 = await getDocs(q);
     querySnapshot2.forEach((doc) => {
-      // console.log(`Document ID: ${doc.id}`);
-      // console.log('Document Data:', doc.data());
-      // console.log('Document Data:', doc.data()['birthDate']);
-      // console.log('Document Data:', doc.data()['birthDate'].toDate());
-      // this.dummyUser= new User(doc.data());
       this.currentUser= new User(
-        '',
+        '', // uid
         doc.data()['email'],
-        '',
+        '', // password
         doc.data()['firstName'],
         doc.data()['lastName'],
         doc.data()['birthDate'].toDate(),
         doc.data()['isAdmin'] === 'true' ? true : false,
         doc.data()['favouriteFlats']
       );
-      console.log(this.currentUser)
     });
-
-    // console.log(userUid);
-    // console.log(usersCollectionRef);
-
-    this.dummyUser = new User(
-      '',
-      '',
-      '',
-      '',
-      '',
-      new Date(),
-      false,
-          // userData.email,
-          // '', // Password is not retrieved from Firestore for security reasons
-          // userData.firstName,
-          // userData.lastName,
-          // userData.birthday,
-          // userData.isAdmin,
-          // userData.favouriteFlats
-    )
-    return this.dummyUser
   }
   // // Login and retrieve user details
   // async login(email: string, password: string): Promise<boolean> {
@@ -107,7 +76,7 @@ export class AuthService {
   //         '', // Password is not retrieved from Firestore for security reasons
   //         userData.firstName,
   //         userData.lastName,
-  //         userData.birthday,
+  //         userData.Date,
   //         userData.isAdmin,
   //         userData.favouriteFlats
   //       );
