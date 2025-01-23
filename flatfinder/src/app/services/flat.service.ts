@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, signOut, User as FirebaseUser } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { User } from '../models/user';
+import { Flat } from '../models/flat';
 import { collection, query, where, getDocs } from '@angular/fire/firestore';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class FlatService {
   private currentUser: User | null = null;
   private dummyUser: User | null = null;
 
@@ -24,16 +25,16 @@ export class AuthService {
       return false;
     }
   }
-  async fetchAllUsers(): Promise<any> {
+  async fetchAllFlats(): Promise<any> {
     try {
-      const usersCollectionRef = collection(this.firestore, 'users'); // Reference to the 'users' collection
-      const querySnapshot = await getDocs(usersCollectionRef);
+      const flatsCollectionRef = collection(this.firestore, 'flats'); // Reference to the 'users' collection
+      const querySnapshot = await getDocs(flatsCollectionRef);
   
-      // Loop through all documents in the collection
-      // querySnapshot.forEach((doc) => {
-      //   console.log(`Document ID: ${doc.id}`);
-      //   console.log('Document Data:', doc.data());
-      // });
+    // //   Loop through all documents in the collection
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(`Document ID: ${doc.id}`);
+    //     console.log('Document Data:', doc.data());
+    //   });
       return querySnapshot;
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -46,7 +47,7 @@ export class AuthService {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       this.currentUser= new User(
-        doc.data()['uid'], // uid
+        '', // uid
         doc.data()['email'],
         '', // password
         doc.data()['firstName'],
@@ -112,3 +113,37 @@ export class AuthService {
     this.currentUser = null;
   }
 }
+
+// import { Injectable } from '@angular/core';
+// import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+
+// @Injectable({
+//   providedIn: 'root',
+// })
+// export class AuthService {
+//   private loggedIn: boolean = false;
+
+//   constructor(private auth: Auth) {}
+
+//   async login(email: string, password: string): Promise<boolean> {
+//     try {
+//       await signInWithEmailAndPassword(this.auth, email, password);
+//       this.loggedIn = true;
+//       return true;
+//     } catch (error) {
+//       console.error('Login failed', error);
+//       return false;
+//     }
+//   }
+
+//   isLoggedIn(): boolean {
+//     return this.loggedIn;
+//   }
+  
+//   logout() {
+//     this.loggedIn = false;
+//     this.auth.signOut();
+//   }
+
+  
+// }

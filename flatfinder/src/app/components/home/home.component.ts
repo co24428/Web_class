@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { Flat } from '../../models/flat';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { FlatService } from '../../services/flat.service';
+import { Firestore, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +16,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   flats: Flat[] = [];
   filteredFlats: Flat[] = [];
   filter = {
@@ -21,10 +25,37 @@ export class HomeComponent {
     showFavorites: false,
   };
 
-  constructor(private dataService: DataService, private userService: UserService) {
-    this.flats = this.dataService.getFlats();
-    this.filteredFlats = [...this.flats];
+  ngOnInit(): void {
+    this.getAllFlats();
+  }
+  constructor(private dataService: DataService, private userService: UserService, private flatService: FlatService) { }
 
+  async getAllFlats(): Promise<void> {
+    const querySnapshot = await this.flatService.fetchAllFlats();
+    querySnapshot.forEach((doc: { id: string; data: () => any }) => {
+      const data = doc.data();
+      
+      const tmpFlat: Flat = {
+        id: data['id'],
+        city: data['city'],
+        streetName: data['streetName'],
+        streetNumber: data['streetNumber'],
+        areaSize: data['areaSize'],
+        hasAC: data['hasAC'],
+        yearBuilt: data['yearBuilt'],
+        rentPrice: data['rentPrice'],
+        dateAvailable: data['dateAvailable'].toDate(),
+        owner: data['owner'],
+        imgLink: data['imgLink'],
+        isFavorite: data['isFavorite'] ?? false // Default: false
+      };
+  
+      console.log('Flat:', tmpFlat);
+      this.flats.push(tmpFlat);
+      this.filteredFlats = [...this.flats];
+    });
+  
+    console.log('All Flats:', this.flats);
   }
 
   applyFilters() {

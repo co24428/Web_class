@@ -26,8 +26,6 @@ export class AllusersComponent implements OnInit {
 
     const querySnapshot = await this.authService.fetchAllUsers();
     querySnapshot.forEach((doc: { id: any; data: () => any; }) => {
-      // console.log(`Document ID: ${doc.id}`);
-      // console.log('Document Data:', doc.data());
       const tmpUser = new User(
         doc.data()['uid'],
         doc.data()['email'],
@@ -40,23 +38,16 @@ export class AllusersComponent implements OnInit {
       );
       this.users.push(tmpUser);
     });
-    console.log(this.users)
-
-
   }
 
   async toggleAdmin(user: User): Promise<void> {
     // Toggle the isAdmin value in the user object
     user.isAdmin = !user.isAdmin;
   
-    console.log(`${user.email} is now ${user.isAdmin ? 'an Admin' : 'not an Admin'}`);
-  
     const usersCollectionRef = collection(this.firestore, 'users');
     const q = query(usersCollectionRef, where('uid', '==', user.uid));
     const querySnapshot = await getDocs(q);
     
-    // const userDocRef = doc(this.firestore, `users/${user.email}`);
-  
     // Update Firestore with the new value
     if (!querySnapshot.empty) {
       // Loop through the documents in the querySnapshot

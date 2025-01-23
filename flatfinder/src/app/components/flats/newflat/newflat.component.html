@@ -1,13 +1,67 @@
-<h2>Post a New Flat</h2>
-<form (ngSubmit)="onSubmit()">
-    <label>City:</label>
-    <input type="text" [(ngModel)]="flat.city" name="city" required>
-    <br />
-    <label>Price:</label>
-    <input type="number" [(ngModel)]="flat.rentPrice" name="rentprice" required>
-    <br />
-    <label>Area Size:</label>
-    <input type="number" [(ngModel)]="flat.areaSize" name="areasize" required>
-    <br />
-    <button type="submit">Save</button>
-</form>
+<div class="new-flat-container">
+    <h1>Add a New Flat</h1>
+    <form [formGroup]="flatForm" (ngSubmit)="onSubmit()">
+      <!-- City -->
+      <label for="city">City</label>
+      <input id="city" formControlName="city" type="text" />
+      <div *ngIf="flatForm.get('city')?.invalid && flatForm.get('city')?.touched">
+        <small class="error">City is required.</small>
+      </div>
+  
+      <!-- Street Name -->
+      <label for="streetName">Street Name</label>
+      <input id="streetName" formControlName="streetName" type="text" />
+      <div *ngIf="flatForm.get('streetName')?.invalid && flatForm.get('streetName')?.touched">
+        <small class="error">Street name is required.</small>
+      </div>
+  
+      <!-- Street Number -->
+      <label for="streetNumber">Street Number</label>
+      <input id="streetNumber" formControlName="streetNumber" type="number" />
+      <div *ngIf="flatForm.get('streetNumber')?.invalid && flatForm.get('streetNumber')?.touched">
+        <small class="error">Street number must be greater than 0.</small>
+      </div>
+  
+      <!-- Area Size -->
+      <label for="areaSize">Area Size (sq. ft.)</label>
+      <input id="areaSize" formControlName="areaSize" type="number" />
+      <div *ngIf="flatForm.get('areaSize')?.invalid && flatForm.get('areaSize')?.touched">
+        <small class="error">Area size must be greater than 0.</small>
+      </div>
+  
+      <!-- Air Conditioning -->
+      <label for="hasAC">Air Conditioning</label>
+      <input id="hasAC" formControlName="hasAC" type="checkbox" />
+  
+      <!-- Year Built -->
+      <label for="yearBuilt">Year Built</label>
+      <input id="yearBuilt" formControlName="yearBuilt" type="number" />
+      <div *ngIf="flatForm.get('yearBuilt')?.invalid && flatForm.get('yearBuilt')?.touched">
+        <small class="error">Year must be greater than 1900.</small>
+      </div>
+  
+      <!-- Rent Price -->
+      <label for="rentPrice">Rent Price ($/month)</label>
+      <input id="rentPrice" formControlName="rentPrice" type="number" />
+      <div *ngIf="flatForm.get('rentPrice')?.invalid && flatForm.get('rentPrice')?.touched">
+        <small class="error">Rent price must be a positive number.</small>
+      </div>
+  
+      <!-- Date Available -->
+      <label for="dateAvailable">Date Available</label>
+      <input id="dateAvailable" formControlName="dateAvailable" type="date" />
+      <div *ngIf="flatForm.get('dateAvailable')?.invalid && flatForm.get('dateAvailable')?.touched">
+        <small class="error">Date is required.</small>
+      </div>
+  
+      <!-- Image Link -->
+      <label for="imgLink">Image Link</label>
+      <input id="imgLink" formControlName="imgLink" type="text" />
+      <div *ngIf="flatForm.get('imgLink')?.invalid && flatForm.get('imgLink')?.touched">
+        <small class="error">Image link is required.</small>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="flatForm.invalid">Add Flat</button>
+    </form>
+  </div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Flat } from '../models/flat';
 
+// this file's role move to flat.service.ts
+// TODO: Should be deleted
 @Injectable({
   providedIn: 'root'
 })
@@ -12,24 +14,6 @@ export class DataService {
     { id: '4', city: 'Montreal', streetName: 'this', streetNumber: 421, areaSize: 900, hasAC: false, yearBuilt: 1988 , rentPrice: 1000, dateAvailable: new Date(2025,2,10) , owner: 'user1', imgLink: '/assets/flats/flat1.png' },
     // { city: 'Montreal', rentPrice: 1000, areaSize: 800, owner: 'user3' },
   ];
-
-  // const flat1 = new Flat('Vancouver', 'Granville', 2323, 4, 33, true, 1200, 12, false, './img/flat1.png', new Date(2024,10,1));
-  // const flat2 = new Flat('Vancouver', 'Howe', 223, 13, 53, true, 1800, 17, false, './img/flat2.png', new Date(2024,11,1));
-  // const flat3 = new Flat('Vancouver', 'Howe', 213, 1, 83, true, 1800, 5, true, './img/flat3.png', new Date(2024,11,15));
-  // const flat4 = new Flat('Toronto', 'this', 273, 4, 75, true, 2300, 2, false, './img/flat1.png', new Date(2024,10,1));
-  // const flat5 = new Flat('Toronto', 'that', 273, 19, 51, true, 2000, 2, false, './img/flat2.png', new Date(2024,10,1));
-
-  // city: string;
-  // streetName: string;
-  // streetNumber: number;
-  // areaSize: number;
-  // hasAC: boolean;
-  // yearBuilt: number;    
-  // rentPrice: number;
-  // dateAvailable: Date;
-  // owner: string;
-  // imgLink: string;
-  // isFavorite?: boolean;
 
   getFlats() {
     return this.flats;
