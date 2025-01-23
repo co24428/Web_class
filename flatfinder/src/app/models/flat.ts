@@ -1,8 +1,14 @@
 export interface Flat {
     id: string;
     city: string;
-    rentPrice: number;
+    streetName: string;
+    streetNumber: number;
     areaSize: number;
-    owner: string; // User ID
+    hasAC: boolean;
+    yearBuilt: number;    
+    rentPrice: number;
+    dateAvailable: Date;
+    owner: string;
+    imgLink: string;
     isFavorite?: boolean; // Optional field for favorites
   }

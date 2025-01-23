@@ -3,28 +3,27 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { MaterialModule } from '../../material/material.module';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge } from 'rxjs';
-import { Router } from '@angular/router';
+import { RouterModule, Router,RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
-
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 
 })
 export class LoginComponent {
-  email = new FormControl<string>('', [Validators.required, Validators.email]);
-  password = new FormControl<string>('', [Validators.required]);
-
   constructor(private authService: AuthService, private router: Router) { }
 
+  email = new FormControl<string>('', [Validators.required, Validators.email]);
+  password = new FormControl<string>('', [Validators.required]);
+  
   async onLogin() {
 
     const emailValue = this.email.value;
@@ -41,7 +40,6 @@ export class LoginComponent {
     } else {
       alert('Login failed: check your email or password');
     }
-    // console.log('Login attempt:', this.email, this.password)
   }
 
 

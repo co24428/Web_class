@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { Flat } from '../../models/flat';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +21,12 @@ export class HomeComponent {
     showFavorites: false,
   };
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private userService: UserService) {
     this.flats = this.dataService.getFlats();
     this.filteredFlats = [...this.flats];
+    console.log(this.flats)
+    console.log(this.filteredFlats)
+
   }
 
   applyFilters() {
@@ -41,7 +45,15 @@ export class HomeComponent {
     this.filteredFlats = [...this.flats];
   }
 
-  toggleFavorite(flat: Flat) {
-    flat.isFavorite = !flat.isFavorite;
+  toggleFavourite(flatId: string): void {
+    if (this.userService.isFavourite(flatId)) {
+      this.userService.removeFavourite(flatId);
+    } else {
+      this.userService.addFavourite(flatId);
+    }
+  }
+
+  isFavourite(flatId: string): boolean {
+    return this.userService.isFavourite(flatId);
   }
 }

@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Firestore, collection, getDocs, addDoc } from '@angular/fire/firestore';
 
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
+  
   constructor(private firestore: Firestore, private auth: Auth) {}
 
   // Firestore 데이터 가져오기
@@ -29,6 +31,7 @@ export class FirebaseService {
 
   // Firebase 인증 - 회원가입
   async signup(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    return await createUserWithEmailAndPassword(this.auth, email, password);
   }
+
 }

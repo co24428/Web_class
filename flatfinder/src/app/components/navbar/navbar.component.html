@@ -7,13 +7,15 @@
     </div> -->
     <div class="nav-links">
         <div *ngIf="!isLoggedIn">
-            <a routerLink="/login">Login</a>  to FlatFinder!
+            <a routerLink="/login">Login</a>  to FlatFinder! |
+            <a routerLink="/register">Register</a>
         </div>
         <div *ngIf="isLoggedIn">
             <a (click)="logout()">Logout</a> |
             <a routerLink="/home">Home</a> |
             <a routerLink="/flats/newflat">Post a Flat</a> |
             <a routerLink="/flats/myflats">Profile / My Flat</a>
+            <a *ngIf="isAdmin" routerLink="/allusers">Manage Users</a>
         </div>
         
     </div>

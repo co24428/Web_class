@@ -8,6 +8,6 @@
 .content {
     flex-grow: 1;
     overflow-y: auto;
-    border: 1px solid red;
-    margin-top: 70px;
+    margin-top: 90px;
+    margin-left: 10px;
 }

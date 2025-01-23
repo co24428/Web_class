@@ -1,4 +1,3 @@
-<h2>Available Flats</h2>
 <div>
     <label>Filter by City:</label>
     <input type="text" [(ngModel)]="filter.city" (input)="applyFilters()" />
@@ -12,12 +11,38 @@
         Show Favorites Only
     </label>
 </div>
-<table>
+<!-- <div class="flat"> -->
+<div class="flats">
+    <div *ngFor="let flat of filteredFlats" class="flat">
+        <!-- Flat Image -->
+        <div class="flatImage">
+            <img [src]="flat.imgLink" [alt]="'Image of ' + flat.city" />
+        </div>
+
+        <!-- Flat Details -->
+        <div class="flatDetail">
+            <p><b>City:</b> {{ flat.city }}</p>
+            <p><b>Street Name:</b> {{ flat.streetName }}</p>
+            <p><b>Street Number:</b> {{ flat.streetNumber }}</p>
+            <p><b>Area Size:</b> {{ flat.areaSize }}</p>
+            <p><b>Air Conditioning:</b> {{ flat.hasAC ? 'Yes' : 'No' }}</p>
+            <p><b>Year Built:</b> {{ flat.yearBuilt }}</p>
+            <p><b>Rental Price (per month):</b> ${{ flat.rentPrice }}</p>
+            <p><b>Owner:</b> {{ flat.owner }}</p>
+            <p><b>Date Available:</b> {{ flat.dateAvailable | date: 'fullDate' }}</p>
+        </div>
+        <button class="favouriteBtn" (click)="toggleFavourite(flat.id)">
+            favourite
+        </button>
+    </div>
+</div>
+<!-- <table>
     <thead>
         <tr>
             <th>City</th>
             <th>Rent Price</th>
             <th>Area Size</th>
+            <th>Owner</th>
             <th>Favorite</th>
         </tr>
     </thead>
@@ -26,6 +51,8 @@
             <td>{{ flat.city }}</td>
             <td>{{ flat.rentPrice }}</td>
             <td>{{ flat.areaSize }} sqft</td>
+            <td>{{ flat.owner }}</td>
+
             <td>
                 <button (click)="toggleFavorite(flat)">
                     {{ flat.isFavorite ? 'Unmark' : 'Mark' }}
@@ -33,4 +60,4 @@
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->
