@@ -6,26 +6,32 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Login informaiton
+[admin]  
+id: admin@gmail.com  
+pw: admin123
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+[user]  
+id: user@gmail.com  
+pw: user123
 
-## Build
+# Screenshot
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Login
+<img src="images_for_md/login_component.png" width=500>
 
-## Running unit tests
+## Home component
+<img src="images_for_md/home_component.png" width=500>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## myflat component
+<img src="images_for_md/myflat_component.png" width=500>
 
-## Running end-to-end tests
+## newflat component
+<img src="images_for_md/newflat_component.png" width=500>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## alluser component ( only for admin user )
+<img src="images_for_md/alluser_component.png" width=500>
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-### to install firebase
+## to install firebase
 
 npm install @angular/fire@17 firebase

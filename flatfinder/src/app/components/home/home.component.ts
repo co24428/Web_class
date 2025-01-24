@@ -49,13 +49,9 @@ export class HomeComponent implements OnInit {
         imgLink: data['imgLink'],
         isFavorite: data['isFavorite'] ?? false // Default: false
       };
-  
-      console.log('Flat:', tmpFlat);
       this.flats.push(tmpFlat);
       this.filteredFlats = [...this.flats];
     });
-  
-    console.log('All Flats:', this.flats);
   }
 
   applyFilters() {

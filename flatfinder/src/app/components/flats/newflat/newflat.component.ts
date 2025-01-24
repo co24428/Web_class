@@ -22,7 +22,6 @@ export class NewflatComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    // Initialize the form group with default values and validators
     this.flatForm = this.fb.group({
       city: ['', Validators.required],
       streetName: ['', Validators.required],
@@ -32,7 +31,6 @@ export class NewflatComponent {
       yearBuilt: [null, [Validators.required, Validators.min(1900)]],
       rentPrice: [null, [Validators.required, Validators.min(0)]],
       dateAvailable: [null, Validators.required],
-      // owner: ['', Validators.required],
       imgLink: ['', Validators.required]
     });
   }

@@ -11,7 +11,6 @@ import { collection, query, where, getDocs } from '@angular/fire/firestore';
 })
 export class FlatService {
   private currentUser: User | null = null;
-  private dummyUser: User | null = null;
 
   constructor(private auth: Auth, private firestore: Firestore) {}
 
@@ -30,11 +29,6 @@ export class FlatService {
       const flatsCollectionRef = collection(this.firestore, 'flats'); // Reference to the 'users' collection
       const querySnapshot = await getDocs(flatsCollectionRef);
   
-    // //   Loop through all documents in the collection
-    //   querySnapshot.forEach((doc) => {
-    //     console.log(`Document ID: ${doc.id}`);
-    //     console.log('Document Data:', doc.data());
-    //   });
       return querySnapshot;
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -58,40 +52,6 @@ export class FlatService {
       );
     });
   }
-  // // Login and retrieve user details
-  // async login(email: string, password: string): Promise<boolean> {
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-
-  //     // Fetch user details from Firestore
-  //     const userDocRef = doc(this.firestore, `users/${userCredential.user.uid}`);
-  //     const userDocSnap = await getDoc(userDocRef);
-      
-  //     if (userDocSnap.exists()) {
-  //       const userData = userDocSnap.data() as User;
-        
-  //       this.currentUser = new User(
-  //         '',
-  //         userData.email,
-  //         '', // Password is not retrieved from Firestore for security reasons
-  //         userData.firstName,
-  //         userData.lastName,
-  //         userData.Date,
-  //         userData.isAdmin,
-  //         userData.favouriteFlats
-  //       );
-  //     } else {
-  //       console.error('User document does not exist in Firestore.');
-  //       return false;
-  //     }
-
-  //     return true;
-  //   } catch (error) {
-  //     console.error('Login failed:', error);
-  //     return false;
-  //   }
-  // }
-
   // Check if the current user is logged in
   isLoggedIn(): boolean {
     return this.currentUser !== null;
@@ -113,37 +73,3 @@ export class FlatService {
     this.currentUser = null;
   }
 }
-
-// import { Injectable } from '@angular/core';
-// import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class AuthService {
-//   private loggedIn: boolean = false;
-
-//   constructor(private auth: Auth) {}
-
-//   async login(email: string, password: string): Promise<boolean> {
-//     try {
-//       await signInWithEmailAndPassword(this.auth, email, password);
-//       this.loggedIn = true;
-//       return true;
-//     } catch (error) {
-//       console.error('Login failed', error);
-//       return false;
-//     }
-//   }
-
-//   isLoggedIn(): boolean {
-//     return this.loggedIn;
-//   }
-  
-//   logout() {
-//     this.loggedIn = false;
-//     this.auth.signOut();
-//   }
-
-  
-// }

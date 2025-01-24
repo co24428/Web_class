@@ -1,23 +1,23 @@
 <h2>My Flats</h2>
 <button (click)="addNewFlat()">Add New Flat</button>
-<table>
-    <thead>
-        <tr>
-            <th>City</th>
-            <th>Rent Price</th>
-            <th>Area Size</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let flat of myFlats">
-            <td>{{ flat.city }}</td>
-            <td>{{ flat.rentPrice }}</td>
-            <td>{{ flat.areaSize }} sqft</td>
-            <td>
-                <button (click)="editFlat(flat.id)">Edit</button>
-                <button (click)="deleteFlat(flat.id)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="flats">
+    <div *ngFor="let flat of myFlats" class="flat">
+        <!-- Flat Image -->
+        <div class="flatImage">
+            <img [src]="flat.imgLink" [alt]="'Image of ' + flat.city" />
+        </div>
+
+        <!-- Flat Details -->
+        <div class="flatDetail">
+            <p><b>City:</b> {{ flat.city }}</p>
+            <p><b>Street Name:</b> {{ flat.streetName }}</p>
+            <p><b>Street Number:</b> {{ flat.streetNumber }}</p>
+            <p><b>Area Size:</b> {{ flat.areaSize }}</p>
+            <p><b>Air Conditioning:</b> {{ flat.hasAC ? 'Yes' : 'No' }}</p>
+            <p><b>Year Built:</b> {{ flat.yearBuilt }}</p>
+            <p><b>Rental Price (per month):</b> ${{ flat.rentPrice }}</p>
+            <p><b>Owner:</b> {{ flat.owner }}</p>
+            <p><b>Date Available:</b> {{ flat.dateAvailable | date: 'fullDate' }}</p>
+        </div>
+    </div>
+</div>

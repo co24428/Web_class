@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { merge } from 'rxjs';
-import { RouterModule, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { Firestore, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
@@ -23,7 +22,6 @@ export class AllusersComponent implements OnInit {
   users: User[] = [];
 
   async getAllUsers() {
-
     const querySnapshot = await this.authService.fetchAllUsers();
     querySnapshot.forEach((doc: { id: any; data: () => any; }) => {
       const tmpUser = new User(

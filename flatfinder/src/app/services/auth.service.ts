@@ -29,11 +29,6 @@ export class AuthService {
       const usersCollectionRef = collection(this.firestore, 'users'); // Reference to the 'users' collection
       const querySnapshot = await getDocs(usersCollectionRef);
   
-      // Loop through all documents in the collection
-      // querySnapshot.forEach((doc) => {
-      //   console.log(`Document ID: ${doc.id}`);
-      //   console.log('Document Data:', doc.data());
-      // });
       return querySnapshot;
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -57,40 +52,6 @@ export class AuthService {
       );
     });
   }
-  // // Login and retrieve user details
-  // async login(email: string, password: string): Promise<boolean> {
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-
-  //     // Fetch user details from Firestore
-  //     const userDocRef = doc(this.firestore, `users/${userCredential.user.uid}`);
-  //     const userDocSnap = await getDoc(userDocRef);
-      
-  //     if (userDocSnap.exists()) {
-  //       const userData = userDocSnap.data() as User;
-        
-  //       this.currentUser = new User(
-  //         '',
-  //         userData.email,
-  //         '', // Password is not retrieved from Firestore for security reasons
-  //         userData.firstName,
-  //         userData.lastName,
-  //         userData.Date,
-  //         userData.isAdmin,
-  //         userData.favouriteFlats
-  //       );
-  //     } else {
-  //       console.error('User document does not exist in Firestore.');
-  //       return false;
-  //     }
-
-  //     return true;
-  //   } catch (error) {
-  //     console.error('Login failed:', error);
-  //     return false;
-  //   }
-  // }
-
   // Check if the current user is logged in
   isLoggedIn(): boolean {
     return this.currentUser !== null;
@@ -101,12 +62,10 @@ export class AuthService {
     return this.currentUser?.isAdmin ?? false;
   }
 
-  // Get the current user's details
   getCurrentUser(): User | null {
     return this.currentUser;
   }
 
-  // Logout the user
   async logout(): Promise<void> {
     await signOut(this.auth);
     this.currentUser = null;

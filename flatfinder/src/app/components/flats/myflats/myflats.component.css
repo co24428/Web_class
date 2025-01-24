@@ -1,0 +1,19 @@
+.flat {
+    position: relative; /* for layout */
+    display: flex;
+    margin: 30px 30px;
+  }
+  
+  .flatImage {
+    width: 30%;
+  }
+  
+  .flatImage img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+  }
+  
+  .flatDetail{
+    margin: 5px;
+  }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { User } from '../models/user.model';
 import { User } from '../models/user';
 
 @Injectable({
@@ -20,9 +19,6 @@ export class UserService {
       false,
       [] // Start with no favourites
     );
-    // this.tmpUser = new User(
-    //   ''
-    // )
   }
 
   // Add a flat to the user's favourite list

@@ -1,33 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
+import { AuthService } from '../../../services/auth.service';
+import { FlatService } from '../../../services/flat.service';
 import { Flat } from '../../../models/flat';
+import { RouterModule, Router, RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-myflats',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './myflats.component.html',
   styleUrl: './myflats.component.css'
 })
 export class MyflatsComponent {
+  flats: Flat[] = [];
   myFlats: Flat[] = [];
 
-  constructor(private dataService: DataService) {
-    // Assume the logged-in user's ID is 'user1' for now
-    const userId = 'user1';
-    this.myFlats = this.dataService.getFlats().filter(flat => flat.owner === userId);
+  ngOnInit(): void {
+    this.getMyFlats()
   }
+  constructor(private dataService: DataService, private router: Router, private authService: AuthService, private flatService: FlatService) { }
 
+  async getMyFlats(): Promise<void> {
+    const userName = this.authService.getCurrentUser()?.firstName;
+    const querySnapshot = await this.flatService.fetchAllFlats();
+    querySnapshot.forEach((doc: { id: string; data: () => any }) => {
+      const data = doc.data();
+      
+      const tmpFlat: Flat = {
+        id: data['id'],
+        city: data['city'],
+        streetName: data['streetName'],
+        streetNumber: data['streetNumber'],
+        areaSize: data['areaSize'],
+        hasAC: data['hasAC'],
+        yearBuilt: data['yearBuilt'],
+        rentPrice: data['rentPrice'],
+        dateAvailable: data['dateAvailable'].toDate(),
+        owner: data['owner'],
+        imgLink: data['imgLink'],
+        isFavorite: data['isFavorite'] ?? false // Default: false
+      };
+      this.flats.push(tmpFlat);
+    });
+    this.myFlats = this.flats.filter(flat => { return flat.owner === userName; });
+  }
+  
   addNewFlat() {
-    console.log('Navigating to the New Flat page...');
-    // Navigate to the New Flat page (use a router or appropriate logic)
+    this.router.navigate(['/flats/newflat']);
   }
 
   editFlat(flatId: string) {
     console.log(`Editing flat with ID: ${flatId}`);
-    // Navigate to the Edit Flat page or display a form for editing
   }
 
   deleteFlat(flatId: string) {
